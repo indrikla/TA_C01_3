@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Lihat Bioskop </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('home')"></nav>
+<div class="d-flex justify-content-center">
+    <div class="m-4">
+        <h2 style="text-align: center" th:text=" 'Hello ' + ${#httpServletRequest.remoteUser} + ' !'">Login as</h2>
+        <h2>Selamat datang di 21Cineplux</h2>
+        <div class="d-flex justify-content-center">
+            <a th:href="@{/user/viewall}" class="mx-2 btn btn-warning">Lihat semua user</a>
+            <a th:href="@{/user/add}" class="mx-2 btn btn-outline-warning">Tambah user</a>
+        </div>
+        <div class="my-3 d-flex justify-content-center">
+            <a th:href="@{/cabang/viewall}" class="mx-2 btn btn-warning">Lihat semua cabang</a>
+            <a th:href="@{/cabang/add}" class="mx-2 btn btn-outline-warning">Tambah cabang</a>
+        </div>
+<!--        <div class="my-3 d-flex justify-content-center">-->
+<!--            <a th:href="@{/user/add}" class="mx-2 btn btn-outline-warning">Tambah User Baru</a>-->
+<!--        </div>-->
+    </div>
+</div>
+
+
+<!--Update Password-->
+<!--<br>-->
+<!--<div class="card-body">-->
+<!--    <form th:action="@{/user/updatePassword}" method="POST">-->
+<!--        <p th:text="${message}" class="alert alert-info" role="alert"></p>-->
+<!--        <input type="hidden" name="username" th:value="${#httpServletRequest.userPrincipal.name}">-->
+<!--        <div class="row form-group">-->
+<!--            <label class="col-sd-4"> Password Lama: </label>-->
+<!--            <input class="col-sd-8 form-control input-sm" type="password" name="password">-->
+<!--        </div>-->
+<!--        <div class="row form-group">-->
+<!--            <label class="col-sd-4"> Password Baru: </label>-->
+<!--            <input class="col-sd-8 form-control input-sm" type="password" name="newPassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="password harus mengandung angka, huruf besar, huruf kecil, dan simbol serta minimal memiliki 8 karakter">-->
+<!--        </div>-->
+<!--        <div class="row form-group">-->
+<!--            <label class="col-sd-4"> Konfirmasi Password Baru: </label>-->
+<!--            <input class="col-sd-8 form-control input-sm" type="password" name="confPassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="password harus mengandung angka, huruf besar, huruf kecil, dan simbol serta minimal memiliki 8 karakter">-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <button type="submit" class="btn btn-primary">Simpan</button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+</body>
+
+</html>

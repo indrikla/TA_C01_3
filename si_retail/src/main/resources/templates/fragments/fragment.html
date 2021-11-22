@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>  </title>
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    </head>
+    <head th:fragment="js">
+        <script
+                src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJo="
+                crossorigin="anonymous"
+        ></script>
+        <script
+                src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js
+        "></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+    </head>
+</head>
+
+<body>
+<nav th:fragment="navbar(laman)"  class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand font-weight-bold text-warning" href="/">21Cineplux</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavaltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    > <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" ><a class=" nav-link" th:classappend="${laman == 'home'} ? 'active'"  th:href="@{/}">
+                Home<span class="sr-only">(current)</span>
+            </a></li>
+            <li class="nav-item"><a class=" nav-link" th:classappend="${laman == 'user'} ? 'active'" th:href="@{/user/viewall}">
+                User<span class="sr-only">(current)</span>
+            </a></li>
+            <li class="nav-item"><a class="nav-link" th:classappend="${laman == 'cabang'} ? 'active'" th:href="@{/cabang/viewall}">
+                Cabang<span class="sr-only">(current)</span>
+            </a></li>
+<!--            <li class="nav-item"><a class="nav-link" th:classappend="${laman == 'user'} ? 'active'" th:href="@{/user/viewall}">-->
+<!--                User<span class="sr-only">(current)</span>-->
+<!--            </a></li>-->
+        </ul>
+        <form method="GET" class="form-inline my-2 my-lg-0" th:action="@{/bioskop/view}">
+            <input class="form-control mr-sm-2" type="search"
+                   name="noBioskop" placeholder="No Bioskop" aria-label="search">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav pull-right">
+            <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
+        </ul>
+    </div>
+</nav>
+
+</body>
+</html>
