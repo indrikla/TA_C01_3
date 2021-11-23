@@ -38,4 +38,19 @@ public class CabangController {
         cabangService.addCabang(cabang);
         return "add-cabang-success";
     }
+
+    @GetMapping("/viewall")
+    private String viewAllCabang(Model model) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentUsername = authentication.getName();
+//        UserModel currentUser = userService.getUserByUsername(currentUsername);
+//        if(currentUser.getRole().getId()==1) {
+        List<CabangModel> listCabang = cabangService.getListCabang();
+        model.addAttribute("listCabang", listCabang);
+//            model.addAttribute("currentUser", currentUser);
+        return "viewall-cabang";
+//        } else {
+//            return "not-authorized";
+//        }
+    }
 }

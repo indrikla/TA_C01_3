@@ -18,4 +18,9 @@ public class CabangServiceImpl implements CabangService {
     public void addCabang(CabangModel cabang) {
         cabangDB.save(cabang);
     }
+
+    @Override
+    public List<CabangModel> getListCabang() {
+        return cabangDB.findAll();
+    }
 }

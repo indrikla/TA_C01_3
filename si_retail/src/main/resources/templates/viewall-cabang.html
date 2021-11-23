@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>All Cabang</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar(laman)"></nav>
+<div class="container" th:style="'margin-top:70px;'">
+    <h2 th:style=
+                "'text-align:center;
+            padding-bottom:20px;'"
+    >Daftar Cabang</h2>
+    <br>
+    <a th:href="@{/cabang/add}" th:style=
+            "'font-weight:bold;
+            margin-bottom:20px;'"
+       class="mx-2 btn btn-warning">+Tambah cabang</a>
+    <div th:if="*{listCabang.size() != 0}">
+        <table class="table">
+            <thead>
+            <tr th:style="'text-align:center;'" class="bg-warning">
+                <th>No</th>
+                <th>Id</th>
+                <th>Nama</th>
+                <th>No Telepon</th>
+                <th>Ukuran (m<sup>2</sup>)</th>
+                <th>Jumlah Item</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cabang, iterationStatus : ${listCabang}"
+                th:style="${iterationStatus.odd} ? 'background:#E0E0E0;'" class="text-center">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${cabang.id}"></td>
+                <td th:text="${cabang.nama}"></td>
+                <td th:text="${cabang.no_telp}"></td>
+                <td th:text="${cabang.ukuran}"></td>
+                <td></td>
+                <td th:if="${cabang.status} == 1">DISETUJUI</td>
+                <td th:if="${cabang.status} == 0">TIDAK DISETUJUI</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-primary" th:href="@{/cabang/viewall}">Detail</a>
+                    <a class="btn btn-sm btn-primary" th:href="@{/cabang/viewall}">Update</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </form>
+    </div>
+    <div th:unless="*{listCabang.size() != 0}">
+        <h2 th:text="'Tidak ada cabang'"></h2>
+    </div>
+
+
+</div>
+</body>
+
+</html>
