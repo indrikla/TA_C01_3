@@ -7,5 +7,5 @@ import apap.tk.si_retail.model.CabangModel;
 import java.util.List;
 
 public interface CabangDB extends JpaRepository<CabangModel, Integer> {
-    List<CabangModel> findAllByUser(UserModel user);
+    List<CabangModel> findAllByPenanggungJawab(UserModel penanggungJawab);
 }

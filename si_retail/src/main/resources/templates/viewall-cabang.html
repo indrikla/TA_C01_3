@@ -45,8 +45,9 @@
                 <td th:text="${cabang.no_telp}"></td>
                 <td th:text="${cabang.ukuran}"></td>
                 <td th:text="${listJmlItem[__${iterationStatus.index}__]}"></td>
-                <td th:if="${cabang.status} == 1">DISETUJUI</td>
-                <td th:if="${cabang.status} == 0">TIDAK DISETUJUI</td>
+                <td th:if="${cabang.status} == 0">Menunggu Persetujuan</td>
+                <td th:if="${cabang.status} == 1">Ditolak</td>
+                <td th:if="${cabang.status} == 2">Disetujui</td>
                 <td>
                     <a class="btn btn-sm btn-outline-primary" th:href="@{/cabang/viewall}">Detail</a>
                     <a class="btn btn-sm btn-primary" th:href="@{/cabang/viewall}">Update</a>

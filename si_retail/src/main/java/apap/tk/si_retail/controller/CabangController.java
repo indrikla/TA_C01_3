@@ -44,9 +44,9 @@ public class CabangController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
         UserModel currentUser = userService.findUserByUsername(currentUsername);
-        cabang.setUser(currentUser);
+        cabang.setPenanggungJawab(currentUser);
         model.addAttribute("nama", cabang.getNama());
-        System.out.println(cabang.getUser());
+        System.out.println(cabang.getPenanggungJawab());
         cabangService.addCabang(cabang);
         return "add-cabang-success";
     }

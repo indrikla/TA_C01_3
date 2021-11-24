@@ -27,6 +27,6 @@ public class CabangServiceImpl implements CabangService {
 
     @Override
     public List<CabangModel> getListCabangManager(UserModel manager) {
-        return cabangDB.findAllByUser(manager);
+        return cabangDB.findAllByPenanggungJawab(manager);
     }
 }

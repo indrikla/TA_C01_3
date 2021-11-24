@@ -41,7 +41,7 @@ public class CabangModel implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    private Integer status=1;
+    private Integer status=2;
 
     @NotNull
     @Size(max=20)
@@ -49,9 +49,9 @@ public class CabangModel implements Serializable {
     private String no_telp;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "id_user", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "penanggung_jawab", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private UserModel user;
+    private UserModel penanggungJawab;
 
     @OneToMany(mappedBy = "cabang", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ItemCabangModel> listItemCabang;
