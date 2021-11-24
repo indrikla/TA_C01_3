@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -56,8 +57,19 @@ public class CabangController {
         String currentUsername = authentication.getName();
         UserModel currentUser = userService.findUserByUsername(currentUsername);
         Long idRole = currentUser.getRole().getId();
-        List<CabangModel> listCabang = cabangService.getListCabang();
+        List<CabangModel> listCabang;
+        if(idRole == 2) {
+            listCabang = cabangService.getListCabangManager(currentUser);
+        } else {
+            listCabang = cabangService.getListCabang();
+        }
+        List<Integer> listJmlItem = new ArrayList<>();
+        for(CabangModel cabang: listCabang) {
+            listJmlItem.add(cabang.getListItemCabang().size());
+        }
+
         model.addAttribute("listCabang", listCabang);
+        model.addAttribute("listJmlItem", listJmlItem);
         model.addAttribute("idRole", idRole);
         return "viewall-cabang";
     }

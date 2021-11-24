@@ -44,7 +44,7 @@
                 <td th:text="${cabang.nama}"></td>
                 <td th:text="${cabang.no_telp}"></td>
                 <td th:text="${cabang.ukuran}"></td>
-                <td></td>
+                <td th:text="${listJmlItem[__${iterationStatus.index}__]}"></td>
                 <td th:if="${cabang.status} == 1">DISETUJUI</td>
                 <td th:if="${cabang.status} == 0">TIDAK DISETUJUI</td>
                 <td>

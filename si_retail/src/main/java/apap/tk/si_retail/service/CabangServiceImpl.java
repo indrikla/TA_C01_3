@@ -1,6 +1,7 @@
 package apap.tk.si_retail.service;
 
 import apap.tk.si_retail.model.CabangModel;
+import apap.tk.si_retail.model.UserModel;
 import apap.tk.si_retail.repository.CabangDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,10 @@ public class CabangServiceImpl implements CabangService {
     @Override
     public List<CabangModel> getListCabang() {
         return cabangDB.findAll();
+    }
+
+    @Override
+    public List<CabangModel> getListCabangManager(UserModel manager) {
+        return cabangDB.findAllByUser(manager);
     }
 }
