@@ -14,9 +14,14 @@
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
-                <h2 th:text="'Cabang ' + ${nama} + ' berhasil diubah!'"></h2>
+                <h2 th:text="'User berhasil diubah!'"></h2>
                 <br>
-                <a class="btn btn-warning pl-4 pr-4" href="/cabang/viewall">OK</a>
+                <div th:if="${userId == currentUser.id}">
+                    <a class="btn btn-warning pl-4 pr-4" th:href="@{/logout}">OK</a>
+                </div>
+                <div th:if="!${userId == currentUser.id}">
+                    <a class="btn btn-warning pl-4 pr-4" href="/user/viewall">OK</a>
+                </div>
             </div>
         </div>
     </div>
