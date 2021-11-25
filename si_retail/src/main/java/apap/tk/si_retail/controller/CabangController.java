@@ -9,10 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,4 +70,28 @@ public class CabangController {
         model.addAttribute("idRole", idRole);
         return "viewall-cabang";
     }
+
+    @GetMapping("/update/{idCabang}")
+    public String updateCabangForm(
+            @PathVariable Long idCabang,
+            Model model
+    ) {
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+
+        model.addAttribute("cabang", cabang);
+
+        return "form-update-cabang";
+    }
+
+    @PostMapping("/update")
+    public String updateCabangSubmit(
+            @ModelAttribute CabangModel cabang,
+            Model model
+    ) {
+        cabangService.updateCabang(cabang);
+        model.addAttribute("nama", cabang.getNama()
+        );
+        return "update-cabang";
+    }
+
 }

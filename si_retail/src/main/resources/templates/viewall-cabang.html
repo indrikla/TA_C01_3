@@ -48,9 +48,12 @@
                 <td th:if="${cabang.status} == 0">Menunggu Persetujuan</td>
                 <td th:if="${cabang.status} == 1">Ditolak</td>
                 <td th:if="${cabang.status} == 2">Disetujui</td>
-                <td>
+                <td class="d-inline-flex">
                     <a class="btn btn-sm btn-outline-primary" th:href="@{/cabang/viewall}">Detail</a>
-                    <a class="btn btn-sm btn-primary" th:href="@{/cabang/viewall}">Update</a>
+                    <div th:if="${idRole != 3}">
+                    <a class="btn btn-sm btn-primary ml-2 mr-2" th:href="@{/cabang/update/} + ${cabang.id}">Update</a>
+                    <a class="btn btn-sm btn-danger" th:href="@{/cabang/viewall}">Delete</a>
+                    </div>
                 </td>
             </tr>
             </tbody>
