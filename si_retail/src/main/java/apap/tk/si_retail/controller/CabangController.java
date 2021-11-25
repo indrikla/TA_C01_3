@@ -83,7 +83,6 @@ public class CabangController {
         return "form-update-cabang";
     }
 
-
     @PostMapping("/update")
     public String updateCabangSubmit(
             @ModelAttribute CabangModel cabang,

@@ -17,14 +17,14 @@
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
-                <a class="text-dark " href="/cabang/viewall"><u>← Back</u></a>
                 <div th:if="${res == 1}">
                     <h2 th:text="'Cabang ' + ${nama} + ' berhasil dihapus!'"></h2>
                     <br>
-                    <div th:if="${res == 0}">
-                        <h2 th:text="'Cabang ' + ${nama} + ' belum berhasil dihapus. Silahkan menunggu pergantian status Cabang.'"></h2>
-                        <br>
-                    </div>
+                <div th:if="${res == 0}">
+                    <h2 th:text="'Cabang ' + ${nama} + ' belum berhasil dihapus. Silahkan menunggu pergantian status Cabang.'"></h2>
+                    <br>
+                </div>
+                <a class="btn btn-warning pl-4 pr-4" href="/cabang/viewall">OK</a>
                 </div>
             </div>
         </div>
