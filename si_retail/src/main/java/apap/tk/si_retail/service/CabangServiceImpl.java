@@ -1,6 +1,7 @@
 package apap.tk.si_retail.service;
 
 import apap.tk.si_retail.model.CabangModel;
+import apap.tk.si_retail.model.UserModel;
 import apap.tk.si_retail.repository.CabangDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class CabangServiceImpl implements CabangService {
     }
 
     @Override
+    public List<CabangModel> getListCabangManager(UserModel manager) {
+        return cabangDB.findAllByPenanggungJawab(manager);
+    }
+
+    @Override
     public CabangModel getCabangByIdCabang(Long idCabang) {
         Optional<CabangModel> cabang = cabangDB.findById(idCabang);
         if(cabang.isPresent()) {
@@ -38,5 +44,4 @@ public class CabangServiceImpl implements CabangService {
     public void updateCabang(CabangModel cabang) {
         cabangDB.save(cabang);
     }
-
 }
