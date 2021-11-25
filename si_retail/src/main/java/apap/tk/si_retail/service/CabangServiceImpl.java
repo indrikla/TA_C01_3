@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,4 +24,19 @@ public class CabangServiceImpl implements CabangService {
     public List<CabangModel> getListCabang() {
         return cabangDB.findAll();
     }
+
+    @Override
+    public CabangModel getCabangByIdCabang(Long idCabang) {
+        Optional<CabangModel> cabang = cabangDB.findById(idCabang);
+        if(cabang.isPresent()) {
+            return cabang.get();
+        }
+        return null;
+    }
+
+    @Override
+    public void updateCabang(CabangModel cabang) {
+        cabangDB.save(cabang);
+    }
+
 }
