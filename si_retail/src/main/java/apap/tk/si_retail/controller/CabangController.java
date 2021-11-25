@@ -88,10 +88,33 @@ public class CabangController {
             @ModelAttribute CabangModel cabang,
             Model model
     ) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        UserModel currentUser = userService.findUserByUsername(currentUsername);
+        cabang.setPenanggungJawab(currentUser);
         cabangService.updateCabang(cabang);
-        model.addAttribute("nama", cabang.getNama()
-        );
+        model.addAttribute("nama", cabang.getNama());
         return "update-cabang";
+    }
+
+    @RequestMapping(value = "/delete/{idCabang}",
+            method = RequestMethod.GET)
+    public String deleteCabangByNoCabang(
+            @PathVariable Long idCabang,
+            @ModelAttribute CabangModel cabangModel,
+            Model model
+    ) {
+        // Untuk constraint terkait dengan item dan status, belum bisa di handle pada progres 1.
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+
+        int res = 0;
+        res = cabangService.deleteCabang(cabang);
+
+        String msg = "";
+
+        model.addAttribute("res", res);
+        model.addAttribute("nama", cabang.getNama());
+        return "remove-cabang";
     }
 
 }
