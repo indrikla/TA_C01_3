@@ -21,8 +21,8 @@
 </head>
 
 <body>
-<nav th:fragment="navbar(laman)"  class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand font-weight-bold text-warning" href="/">21Cineplux</a>
+<nav th:fragment="navbar(laman)"  class="navbar navbar-expand-lg navbar-light bg-info">
+    <a class="navbar-brand font-weight-bold text-dark" href="/">SI-RETAIL</a>
     <button
             class="navbar-toggler"
             type="button"
@@ -48,11 +48,7 @@
 <!--                User<span class="sr-only">(current)</span>-->
 <!--            </a></li>-->
         </ul>
-        <form method="GET" class="form-inline my-2 my-lg-0" th:action="@{/bioskop/view}">
-            <input class="form-control mr-sm-2" type="search"
-                   name="noBioskop" placeholder="No Bioskop" aria-label="search">
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-        </form>
+
         <ul class="navbar-nav pull-right">
             <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
         </ul>

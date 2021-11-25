@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Lihat Bioskop </title>
+    <title> SI RETAIL </title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
@@ -12,15 +12,16 @@
 <nav th:replace="fragments/fragment :: navbar('home')"></nav>
 <div class="d-flex justify-content-center">
     <div class="m-4">
-        <h2 style="text-align: center" th:text=" 'Hello ' + ${#httpServletRequest.remoteUser} + ' !'">Login as</h2>
-        <h2>Selamat datang di 21Cineplux</h2>
+        <h2 style="text-align: center" th:text=" 'Hi ' + ${#httpServletRequest.remoteUser} + ' !'">Login as</h2>
+        <h2>Welcome to SI-RETAIL</h2>
+        <br><br>
         <div class="d-flex justify-content-center">
-            <a th:href="@{/user/viewall}" class="mx-2 btn btn-warning">Lihat semua user</a>
-            <a th:href="@{/user/add}" class="mx-2 btn btn-outline-warning">Tambah user</a>
+            <a th:href="@{/user/viewall}" class="mx-2 btn btn-info">Lihat semua user</a>
+            <a th:href="@{/user/add}" class="mx-2 btn btn-outline-info">Tambah user</a>
         </div>
         <div class="my-3 d-flex justify-content-center">
-            <a th:href="@{/cabang/viewall}" class="mx-2 btn btn-warning">Lihat semua cabang</a>
-            <a th:href="@{/cabang/add}" class="mx-2 btn btn-outline-warning">Tambah cabang</a>
+            <a th:href="@{/cabang/viewall}" class="mx-2 btn btn-info">Lihat semua cabang</a>
+            <a th:href="@{/cabang/add}" class="mx-2 btn btn-outline-info">Tambah cabang</a>
         </div>
 <!--        <div class="my-3 d-flex justify-content-center">-->
 <!--            <a th:href="@{/user/add}" class="mx-2 btn btn-outline-warning">Tambah User Baru</a>-->
