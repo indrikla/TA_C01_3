@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>21 Cineplux</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar(laman)"></nav>
+<h2 class="mt-5 ml-5">You are not authorized to view this page.</h2>
+<a class="btn btn-primary ml-5" href="/">Home</a>
+
+</body>
+
+</html>
