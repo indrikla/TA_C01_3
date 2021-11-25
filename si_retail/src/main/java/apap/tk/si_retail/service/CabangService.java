@@ -6,4 +6,7 @@ import java.util.List;
 public interface CabangService {
     void addCabang(CabangModel cabang);
     List<CabangModel> getListCabang();
+    CabangModel getCabangByIdCabang(Long idCabang);
+    void updateCabang(CabangModel cabang);
+
 }
