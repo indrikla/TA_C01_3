@@ -24,7 +24,7 @@
                         <input type="text" name="username" class="form-control" />
 
                         <label>Nama</label>
-                        <input type="text" name="nama" class="form-control" />
+                        <input type="text" name="name" class="form-control" />
 
                         <label>Password</label>
                         <input type="password" name="password" class="form-control" />
@@ -32,7 +32,7 @@
                         <label>Role</label>
                         <select name="role" class="form-control">
                             <option selected value=""> -- Pilih Role -- </option>
-                            <option th:each="role : ${listRole}" th:value="${role.id}" th:text="${role.name}"></option>
+                            <option th:each="role : ${listRole}" th:value="${role.id}" th:text="${role.nama}"></option>
                         </select>
                         <br>
                         <a class="btn btn-outline-primary" href="/">Home</a>

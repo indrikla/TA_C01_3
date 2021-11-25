@@ -44,4 +44,16 @@ public class CabangServiceImpl implements CabangService {
     public void updateCabang(CabangModel cabang) {
         cabangDB.save(cabang);
     }
+
+    @Override
+    public int deleteCabang(CabangModel cabang) {
+        // Untuk constraint terkait dengan item dan status, belum bisa di handle pada progres 1.
+        int status = cabang.getStatus();
+
+        if (status == 0 || status == 1|| status == 2) {
+            cabangDB.delete(cabang);
+            return 1;
+        }
+        return 0;
+    }
 }
