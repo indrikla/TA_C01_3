@@ -103,9 +103,7 @@ public class CabangController {
 
         int res = 0;
         res = cabangService.deleteCabang(cabang);
-
         String msg = "";
-
         model.addAttribute("res", res);
         model.addAttribute("nama", cabang.getNama());
         return "remove-cabang";
