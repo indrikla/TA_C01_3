@@ -12,10 +12,10 @@
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
 | 1906353403 | Ibnu Hambali | 1, 2, 3 |
-| 1906398963 | Zalfa Luqyana Akifah | 1, 2, 3 |
-| 1906353643 | Fahmi Firstian Dani | X X X |
-| 1906305934 | Fayza Azzahra Robby | X X X |
-| 1906302554 | Indri Klarissa Ramadhanti | X X X |
+| 1906398963 | Zalfa Luqyana Akifah | 7, 10 |
+| 1906353643 | Fahmi Firstian Dani | 6, 11 |
+| 1906305934 | Fayza Azzahra Robby | 8, 9 |
+| 1906302554 | Indri Klarissa Ramadhanti | 4, 5 |
 
 ---
 **Kontrak Tahap 2 Tugas Akhir**
