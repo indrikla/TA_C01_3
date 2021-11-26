@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${cabang.nama}"></title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <style>
+        .title{
+            width: 30%;
+        }
+        .btn {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav th:replace="fragments/fragment :: navbar('none')"></nav>
+    <div class="container">
+        <div class="card">
+            <div style="padding:20px; background-color:#17a2b8;">
+                <h2 class="text-center">Detail Cabang</h2>
+            </div>
+            <div class="card-body">
+                <a class="text-dark " href="/cabang/viewall"><u>← Back</u></a>
+                <br><br>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td class="title">
+                                <b>Nama Cabang</b>         
+                            </td>
+                            <td>
+                                <p th:text="': ' + ${cabang.nama}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                <b>Alamat</b>         
+                            </td>
+                            <td>
+                                <p th:text="': ' + ${cabang.alamat}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                <b>Ukuran Cabang</b>       
+                            </td>
+                            <td>
+                                <p th:text="': ' + ${cabang.ukuran}">m<sup>2</sup></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                <b>Status</b>         
+                            </td>
+                            <td>
+                                <p th:if="${cabang.status} == 0">: Menunggu Persetujuan</p>
+                                <p th:if="${cabang.status} == 1">: Ditolak</p>
+                                <p th:if="${cabang.status} == 2">: Disetujui</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                <b>Nomor Telepon</b>        
+                            </td>
+                            <td>
+                                <p th:text="': ' + ${cabang.no_telp}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                <b>Penanggung Jawab </b>        
+                            </td>
+                            <td>
+                                <p th:text="': ' + ${cabang.penanggungJawab.name}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="title">
+                                <b>Item Cabang</b>         
+                            </td>
+                            <td>
+                                <div th:unless="*{cabang.listItemCabang.size() !=0}">
+                                    <p th:text="'(Belum ada item Cabang)'"></p>
+                                </div>
+                                <br>
+                                <div th:if="*{cabang.listItemCabang.size() !=0}">
+                                    <!-- TODO: fill item cabang kalo udah ada, bentuknya bisa pake tabel aja -->
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

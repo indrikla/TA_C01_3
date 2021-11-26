@@ -19,13 +19,14 @@
     <br>
     <a class="btn btn-primary" th:href="@{/user/add}">Tambah User</a>
     <br><br>
-    <div sec:authorize="hasAuthority('ADMIN')">
+    <div>
         <table class="table">
             <thead class="thead-light">
             <tr>
                 <th scope="col">Nama</th>
                 <th scope="col">Username</th>
                 <th scope="col">Role</th>
+                <th sec:authorize="!hasAuthority('Staff Cabang')" scope="col">Update Data</th>
 <!--                <th scope="col">Action</th>-->
             </tr>
             </thead>
@@ -37,6 +38,9 @@
                     <span th:if="${user.role.id == 1}" th:text="'Kepala Retail'"></span>
                     <span th:if="${user.role.id == 2}" th:text="'Manager Cabang'"></span>
                     <span th:if="${user.role.id == 3}" th:text="'Staff Cabang'"></span>
+                </td>
+                <td sec:authorize="!hasAuthority('Staff Cabang')">
+                    <a th:if="!${user.role.id == 1 && currentUserRole == 2}" style="color: blue" th:href="@{/user/update/} + ${user.username}" class="btn btn-outline">Update</a>
                 </td>
 <!--                <td>-->
 <!--                    <a class="btn btn-danger" th:href="@{/user/delete}">Delete</a>-->

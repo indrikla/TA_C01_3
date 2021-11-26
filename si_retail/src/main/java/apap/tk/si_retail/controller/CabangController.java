@@ -77,9 +77,7 @@ public class CabangController {
             Model model
     ) {
         CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
-
         model.addAttribute("cabang", cabang);
-
         return "form-update-cabang";
     }
 
@@ -89,9 +87,36 @@ public class CabangController {
             Model model
     ) {
         cabangService.updateCabang(cabang);
-        model.addAttribute("nama", cabang.getNama()
-        );
+        model.addAttribute("nama", cabang.getNama());
         return "update-cabang";
+    }
+
+    @RequestMapping(value = "/delete/{idCabang}",
+            method = RequestMethod.GET)
+    public String deleteCabangByNoCabang(
+            @PathVariable Long idCabang,
+            @ModelAttribute CabangModel cabangModel,
+            Model model
+    ) {
+        // Untuk constraint terkait dengan item dan status, belum bisa di handle pada progres 1.
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+
+        int res = 0;
+        res = cabangService.deleteCabang(cabang);
+        String msg = "";
+        model.addAttribute("res", res);
+        model.addAttribute("nama", cabang.getNama());
+        return "remove-cabang";
+    }
+
+    @GetMapping("/{idCabang}")
+    public String detailCabang(
+            @PathVariable Long idCabang,
+            Model model
+    ) {
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+        model.addAttribute("cabang", cabang);
+        return "view-cabang";
     }
 
 }
