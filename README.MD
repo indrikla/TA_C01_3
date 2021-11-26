@@ -1,4 +1,4 @@
-# Tugas Akhir
+# Tugas Akhir C01-3 (SI-RETAIL)
 ## Authors
 * **Ibnu Hambali** - *1906353403* - *C*
 * **Zalfa Luqyana Akifah** - *1906398963* - *C*
@@ -29,7 +29,7 @@
 | 1906302554 | Indri Klarissa Ramadhanti | 13 |
 
 ---
-**Kontrak Tahap 2 Tugas Akhir**
+**Kontrak Tahap 3 Tugas Akhir**
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
 | ----------| --- | ---------- | 
