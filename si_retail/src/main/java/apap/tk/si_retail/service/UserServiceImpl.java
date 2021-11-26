@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUser(UserModel user) {
+        userDB.save(user);
+    }
+
+    @Override
     public boolean checkIfValidOldPassword(UserModel user, String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (passwordEncoder.matches(password, user.getPassword())) {

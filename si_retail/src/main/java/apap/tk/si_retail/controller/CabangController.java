@@ -103,12 +103,20 @@ public class CabangController {
 
         int res = 0;
         res = cabangService.deleteCabang(cabang);
-
         String msg = "";
-
         model.addAttribute("res", res);
         model.addAttribute("nama", cabang.getNama());
         return "remove-cabang";
+    }
+
+    @GetMapping("/{idCabang}")
+    public String detailCabang(
+            @PathVariable Long idCabang,
+            Model model
+    ) {
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+        model.addAttribute("cabang", cabang);
+        return "view-cabang";
     }
 
 }
