@@ -77,9 +77,7 @@ public class CabangController {
             Model model
     ) {
         CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
-
         model.addAttribute("cabang", cabang);
-
         return "form-update-cabang";
     }
 
@@ -88,10 +86,6 @@ public class CabangController {
             @ModelAttribute CabangModel cabang,
             Model model
     ) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUsername = authentication.getName();
-        UserModel currentUser = userService.findUserByUsername(currentUsername);
-        cabang.setPenanggungJawab(currentUser);
         cabangService.updateCabang(cabang);
         model.addAttribute("nama", cabang.getNama());
         return "update-cabang";
@@ -109,9 +103,7 @@ public class CabangController {
 
         int res = 0;
         res = cabangService.deleteCabang(cabang);
-
         String msg = "";
-
         model.addAttribute("res", res);
         model.addAttribute("nama", cabang.getNama());
         return "remove-cabang";

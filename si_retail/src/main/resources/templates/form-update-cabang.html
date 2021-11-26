@@ -41,6 +41,11 @@
 
           <input type="hidden" th:field="*{status}" />
 
+          Penanggung Jawab : <br>
+          <input class="form-control" type="text" name="penanggungJawab" th:value="*{penanggungJawab.name}" disabled/>
+          <input type="hidden" th:field="*{penanggungJawab.id}" />
+          <br><br>
+
           <button class="btn btn-primary" type="submit">Submit</button>
         </form>
       </div>
