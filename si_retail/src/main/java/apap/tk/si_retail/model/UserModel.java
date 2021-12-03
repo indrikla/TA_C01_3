@@ -48,6 +48,7 @@ public class UserModel implements Serializable {
     @JsonIgnore
     private RoleModel role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "penanggungJawab", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CabangModel> listCabang;
 

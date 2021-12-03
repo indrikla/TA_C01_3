@@ -37,7 +37,7 @@ public class CabangController {
     }
 
     @PostMapping(value="/add")
-    private String addUserSubmit(@ModelAttribute CabangModel cabang, Model model) {
+    private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
         UserModel currentUser = userService.findUserByUsername(currentUsername);
