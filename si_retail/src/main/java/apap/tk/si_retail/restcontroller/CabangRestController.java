@@ -26,12 +26,4 @@ public class CabangRestController {
             return cabangRestService.createCabang(cabang);
         }
     }
-
-//    @PostMapping(value="/create")
-//    private CabangModel createCabang(@RequestBody CabangModel cabang, BindingResult bindingResult) {
-//        System.out.println("yesss");
-//        return cabangRestService.createCabang(cabang);
-//    }
-
-
-    }
+}
