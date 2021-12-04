@@ -119,4 +119,9 @@ public class CabangController {
         return "view-cabang";
     }
 
+    @GetMapping("/{idCabang}/add/item")
+    public String addItemCabangFormPage(@PathVariable Long idCabang, Model model) {
+        return "form-add-item-cabang";
+    }
+
 }

@@ -78,22 +78,35 @@
                                 <p th:text="': ' + ${cabang.penanggungJawab.name}"></p>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="title">
-                                <b>Item Cabang</b>         
-                            </td>
-                            <td>
-                                <div th:unless="*{cabang.listItemCabang.size() !=0}">
-                                    <p th:text="'(Belum ada item Cabang)'"></p>
-                                </div>
-                                <br>
-                                <div th:if="*{cabang.listItemCabang.size() !=0}">
-                                    <!-- TODO: fill item cabang kalo udah ada, bentuknya bisa pake tabel aja -->
-                                </div>
-                            </td>
-                        </tr>
                     </tbody>
-                </table> 
+                </table>
+                <div>
+                    <div style="text-align: right">
+                        <a style="text-align: right" class="btn btn-primary" th:href="${cabang.id} + @{/add/item}"> + Tambah Item</a>
+                    </div>
+                    <b class="title">Item Cabang</b>
+                </div>
+                <div th:unless="*{cabang.listItemCabang.size() !=0}">
+                    <p th:text="'(Belum ada item Cabang)'"></p>
+                </div>
+
+                <div th:if="*{cabang.listItemCabang.size() !=0}">
+                    <table class="table">
+                        <thead>
+                            <tr th:style="'text-align:center;'" class="bg-warning">
+                                <th>Nama</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Kategori</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
