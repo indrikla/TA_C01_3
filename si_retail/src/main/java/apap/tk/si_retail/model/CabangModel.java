@@ -50,7 +50,7 @@ public class CabangModel implements Serializable {
     private String no_telp;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "penanggung_jawab", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "penanggung_jawab", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserModel penanggungJawab;
 
