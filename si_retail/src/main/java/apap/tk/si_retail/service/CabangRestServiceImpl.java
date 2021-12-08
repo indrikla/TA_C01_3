@@ -15,8 +15,6 @@ import javax.transaction.Transactional;
 public class CabangRestServiceImpl implements CabangRestService{
     @Autowired
     private CabangDB cabangDB;
-    @Autowired
-    private UserDB userDB;
 
     @Override
     public CabangModel createCabang(CabangModel cabang){
