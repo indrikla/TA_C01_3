@@ -109,4 +109,14 @@ public class CabangController {
         return "remove-cabang";
     }
 
+    @GetMapping("/{idCabang}")
+    public String detailCabang(
+            @PathVariable Long idCabang,
+            Model model
+    ) {
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+        model.addAttribute("cabang", cabang);
+        return "view-cabang";
+    }
+
 }
