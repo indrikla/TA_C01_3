@@ -1,5 +1,6 @@
 package apap.tk.si_retail.restcontroller;
 
+import apap.tk.si_retail.rest.BaseResponseCabangModel;
 import apap.tk.si_retail.model.CabangModel;
 import apap.tk.si_retail.service.CabangRestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,25 @@ public class CabangRestController {
     CabangRestService cabangRestService;
 
     @PostMapping(value="/create")
-    private CabangModel createCabang(@Valid @RequestBody CabangModel cabang, BindingResult bindingResult) {
+    private BaseResponseCabangModel createCabang(@Valid @RequestBody CabangModel cabang, BindingResult bindingResult) {
+        BaseResponseCabangModel response = new BaseResponseCabangModel();
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
             );
         }else{
-            return cabangRestService.createCabang(cabang);
+            try {
+                CabangModel newCabang = cabangRestService.createCabang(cabang);
+                response.setStatus(201);
+                response.setMessage("created");
+                response.setCabangModel(newCabang);
+            } catch (Exception e) {
+                response.setStatus(400);
+                response.setMessage(e.toString());
+                response.setCabangModel(null);
+            }
+            return response;
+//            return cabangRestService.createCabang(cabang);
         }
     }
 }
