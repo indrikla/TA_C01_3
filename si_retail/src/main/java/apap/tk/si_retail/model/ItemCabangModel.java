@@ -54,4 +54,5 @@ public class ItemCabangModel implements Serializable {
     @NotNull
     @Column(nullable = false)
     private Integer id_promo;
+
 }
