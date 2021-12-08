@@ -21,8 +21,6 @@ public class CabangRestServiceImpl implements CabangRestService{
     @Override
     public CabangModel createCabang(CabangModel cabang){
         cabang.setStatus(0);
-        UserModel penanggungJawab = userDB.findById(cabang.getPenanggungJawab().getId());
-        cabang.setPenanggungJawab(penanggungJawab);
         return cabangDB.save(cabang);
     }
 }
