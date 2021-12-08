@@ -20,8 +20,9 @@
                 <div th:if="${res == 1}">
                     <h2 th:text="'Cabang ' + ${nama} + ' berhasil dihapus!'"></h2>
                     <br>
+                </div>
                 <div th:if="${res == 0}">
-                    <h2 th:text="'Cabang ' + ${nama} + ' belum berhasil dihapus. Silahkan menunggu pergantian status Cabang.'"></h2>
+                    <h2 th:text="'Cabang ' + ${nama} + ' belum berhasil dihapus. Masih terdapat item yang terdaftar pada ' + ${nama} + '.'"></h2>
                     <br>
                 </div>
                 <a class="btn btn-warning pl-4 pr-4" href="/cabang/viewall">OK</a>

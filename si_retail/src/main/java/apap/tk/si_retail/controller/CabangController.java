@@ -108,8 +108,7 @@ public class CabangController {
         // Untuk constraint terkait dengan item dan status, belum bisa di handle pada progres 1.
         CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
 
-        int res = 0;
-        res = cabangService.deleteCabang(cabang);
+        int res = cabangService.deleteCabang(cabang);
         String msg = "";
         model.addAttribute("res", res);
         model.addAttribute("nama", cabang.getNama());
