@@ -21,12 +21,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+        http       //other configure params.
+                .csrf().disable();
     }
 
     @Bean
@@ -34,13 +37,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return new BCryptPasswordEncoder();
     }
 
-   @Autowired
-   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-       auth.inMemoryAuthentication()
-               .passwordEncoder(encoder())
-               .withUser("nontonfilm").password(encoder().encode("21cineplux"))
-               .roles("USER");
-   }
+
+//   @Autowired
+//   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+//       auth.inMemoryAuthentication()
+//               .passwordEncoder(encoder())
+//               .withUser("beliBarang").password(encoder().encode("si-retail"))
+//               .roles("USER");
+//   }
+
 
     @Autowired
     private UserDetailsService userDetailsService;

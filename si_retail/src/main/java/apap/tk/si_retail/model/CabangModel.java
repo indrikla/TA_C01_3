@@ -1,5 +1,6 @@
 package apap.tk.si_retail.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,8 +49,8 @@ public class CabangModel implements Serializable {
     @Column(nullable = false)
     private String no_telp;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "penanggung_jawab", referencedColumnName = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "penanggung_jawab", referencedColumnName = "id", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserModel penanggungJawab;
 

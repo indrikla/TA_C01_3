@@ -20,7 +20,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name = "user")
+@Table(name = "pengguna")
 public class UserModel implements Serializable {
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -48,6 +48,7 @@ public class UserModel implements Serializable {
     @JsonIgnore
     private RoleModel role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "penanggungJawab", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CabangModel> listCabang;
 
