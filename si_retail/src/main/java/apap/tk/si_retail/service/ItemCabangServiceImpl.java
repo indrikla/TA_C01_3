@@ -3,10 +3,13 @@ package apap.tk.si_retail.service;
 import apap.tk.si_retail.model.CabangModel;
 import apap.tk.si_retail.model.ItemCabangModel;
 import apap.tk.si_retail.repository.ItemCabangDB;
+import apap.tk.si_retail.rest.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +22,7 @@ public class ItemCabangServiceImpl implements ItemCabangService {
 
     @Override
     public void addItemCabang(ItemCabangModel itemCabang) {
-
+        itemCabangDB.save(itemCabang);
     }
 
     @Override
@@ -40,4 +43,5 @@ public class ItemCabangServiceImpl implements ItemCabangService {
         }
         return null;
     }
+
 }

@@ -23,6 +23,7 @@
             <div style="padding:20px; background-color:#17a2b8;">
                 <h2 class="text-center">Detail Cabang</h2>
             </div>
+            <p style="color: red" th:text="${message}"></p>
             <div class="card-body">
                 <a class="text-dark " href="/cabang/viewall"><u>← Back</u></a>
                 <br><br>
@@ -81,11 +82,12 @@
                     </tbody>
                 </table>
                 <div>
-                    <div style="text-align: right">
+                    <div th:if="${#authorization.expression('hasAuthority(''Kepala Retail'')')}" style="text-align: right">
                         <a style="text-align: right" class="btn btn-primary" th:href="${cabang.id} + @{/add/item}"> + Tambah Item</a>
                     </div>
                     <b class="title">Item Cabang</b>
                 </div>
+                <div>
                 <div th:unless="*{cabang.listItemCabang.size() !=0}">
                     <p th:text="'(Belum ada item Cabang)'"></p>
                 </div>
@@ -98,11 +100,24 @@
                                 <th>Harga</th>
                                 <th>Stok</th>
                                 <th>Kategori</th>
+                                <th>Promo</th>
+                                <th>Hapus</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
+                            <tr th:each="item : ${cabang.listItemCabang}">
+                                <td th:text="${item.nama}"></td>
+                                <td th:text="${item.harga}"></td>
+                                <td th:text="${item.stok}"></td>
+                                <td th:text="${item.kategori}"></td>
+
+<!--                                TODO: Ganti URL dan Authorizationnya -->
+                                <td>
+                                    <a style="margin-top: 0px;" class="btn btn-warning" th:href="@{/}"> Terapkan Promo </a>
+                                </td>
+                                <td>
+                                    <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/}"> Hapus item</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -110,7 +125,7 @@
             </div>
         </div>
     </div>
-
+    </div>
 </body>
 
 </html>
