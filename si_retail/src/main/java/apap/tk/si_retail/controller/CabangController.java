@@ -124,16 +124,14 @@ public class CabangController {
         return "view-cabang";
     }
 
-    @GetMapping("/{idCabang}/add/item")
-    public String addItemCabangFormPage(@PathVariable Long idCabang, Model model) {
-        List<ItemModel> listItemCabangAPI = itemCabangRestService.retrieveListItemModel();
-//        TODO: Risa Verify ini sekali submit harus multiple atau ga
-//        List<ItemCabangModel> listItemCabangPending = cabangService.getCabangByIdCabang(idCabang).getListItemCabang();
-//        model.addAttribute("listItemCabangPending", listItemCabangPending);
-        model.addAttribute("listItemCabangAPI", listItemCabangAPI);
-        model.addAttribute("idCabang", idCabang);
-        return "form-add-item-cabang";
-    }
+//         List<ItemModel> listItemCabangAPI = itemCabangRestService.retrieveListItemModel();
+// //        TODO: Risa Verify ini sekali submit harus multiple atau ga
+// //        List<ItemCabangModel> listItemCabangPending = cabangService.getCabangByIdCabang(idCabang).getListItemCabang();
+// //        model.addAttribute("listItemCabangPending", listItemCabangPending);
+//         model.addAttribute("listItemCabangAPI", listItemCabangAPI);
+//         model.addAttribute("idCabang", idCabang);
+//         return "form-add-item-cabang";
+    // }
 
 
     @PostMapping("/{idCabang}/add/item")
