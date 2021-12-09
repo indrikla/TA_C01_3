@@ -76,7 +76,7 @@
                                 <b>Penanggung Jawab </b>        
                             </td>
                             <td>
-                                <p th:text="': ' + ${cabang.penanggungJawab.name}"></p>
+                                <p th:text="': ' + ${penanggungJawab}"></p>
                             </td>
                         </tr>
                     </tbody>
@@ -124,6 +124,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div style="text-align: right">
+        <a style="text-align: right" class="btn btn-outline-danger" th:href="@{/cabang/delete/} + ${cabang.id}">🗑️ Hapus Cabang</a>
     </div>
     </div>
 </body>
