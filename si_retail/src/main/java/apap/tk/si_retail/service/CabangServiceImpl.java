@@ -51,12 +51,11 @@ public class CabangServiceImpl implements CabangService {
 
     @Override
     public int deleteCabang(CabangModel cabang) {
-        // Untuk constraint terkait dengan item dan status, belum bisa di handle pada progres 1.
         int status = cabang.getStatus();
         List<ItemCabangModel> listItem = cabang.getListItemCabang();
         Boolean checkItem = listItem.size() == 0;
 
-        if ((status == 0 || status == 1) && checkItem) {
+        if (checkItem) {
             cabangDB.delete(cabang);
             return 1;
         }

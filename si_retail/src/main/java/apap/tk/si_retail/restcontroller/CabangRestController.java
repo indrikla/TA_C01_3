@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/cabang")
@@ -39,4 +41,11 @@ public class CabangRestController {
 //            return cabangRestService.createCabang(cabang);
         }
     }
+
+    @GetMapping(value="/list-alamat")
+    private ArrayList<HashMap<String, String>> retrieveAlamatCabang(){
+        return cabangRestService.retrieveAlamatCabang();
+    }
+
+
 }
