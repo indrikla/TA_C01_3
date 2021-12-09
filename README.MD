@@ -24,7 +24,7 @@
 | ----------| --- | ---------- | 
 | 1906353403 | Ibnu Hambali | 12 |
 | 1906398963 | Zalfa Luqyana Akifah | 16 |
-| 1906353643 | Fahmi Firstian Dani | 14 |
+| 1906353643 | Fahmi Firstian Dani | 14, 17 |
 | 1906305934 | Fayza Azzahra Robby | 15, 18 |
 | 1906302554 | Indri Klarissa Ramadhanti | 13 |
 
