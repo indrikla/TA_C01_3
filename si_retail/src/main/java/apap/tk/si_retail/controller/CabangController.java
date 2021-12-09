@@ -43,14 +43,24 @@ public class CabangController {
         }
     }
 
+    // @PostMapping(value="/add")
+    // private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
+    //     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    //     String currentUsername = authentication.getName();
+    //     UserModel currentUser = userService.findUserByUsername(currentUsername);
+
+    //     cabang.setPenanggungJawab(currentUser);
+
+    //     model.addAttribute("nama", cabang.getNama());
+    //     System.out.println(cabang.getPenanggungJawab());
+    //     cabangService.addCabang(cabang);
+    //     return "add-cabang-success";
+    // }
+
     @PostMapping(value="/add")
     private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUsername = authentication.getName();
-        UserModel currentUser = userService.findUserByUsername(currentUsername);
-        cabang.setPenanggungJawab(currentUser);
+        cabang.setStatus(0);
         model.addAttribute("nama", cabang.getNama());
-        System.out.println(cabang.getPenanggungJawab());
         cabangService.addCabang(cabang);
         return "add-cabang-success";
     }
@@ -61,17 +71,21 @@ public class CabangController {
         String currentUsername = authentication.getName();
         UserModel currentUser = userService.findUserByUsername(currentUsername);
         Long idRole = currentUser.getRole().getId();
+
         List<CabangModel> listCabang;
+        List<CabangModel> listCabangRequest = cabangService.getListCabangStatus(0);
+
         if(idRole == 2) {
             listCabang = cabangService.getListCabangManager(currentUser);
         } else {
-            listCabang = cabangService.getListCabang();
+            listCabang = cabangService.getListCabangStatus(2);
         }
         List<Integer> listJmlItem = new ArrayList<>();
         for(CabangModel cabang: listCabang) {
             listJmlItem.add(cabang.getListItemCabang().size());
         }
 
+        model.addAttribute("listCabangReq", listCabangRequest);
         model.addAttribute("listCabang", listCabang);
         model.addAttribute("listJmlItem", listJmlItem);
         model.addAttribute("idRole", idRole);
@@ -120,6 +134,11 @@ public class CabangController {
             Model model
     ) {
         CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+        try{
+            model.addAttribute("penanggungJawab", cabang.getPenanggungJawab().getName());
+        } catch(NullPointerException e){
+            model.addAttribute("penanggungJawab", "-");
+        }
         model.addAttribute("cabang", cabang);
         return "view-cabang";
     }
@@ -187,5 +206,69 @@ public class CabangController {
 
         redirAttrs.addFlashAttribute("message", message);
         return "redirect:/cabang/" + idCabang;
+    }
+
+    @GetMapping("/viewall/request")
+    private String viewAllCabangRequested(Model model) {
+
+        List<CabangModel> listCabang = cabangService.getListCabangStatus(0);
+        List<CabangModel> listCabangRej = cabangService.getListCabangStatus(1);
+
+        List<Integer> listJmlItem = new ArrayList<>();
+        for(CabangModel cabang: listCabang) {
+            listJmlItem.add(cabang.getListItemCabang().size());
+        }
+
+        model.addAttribute("listCabangRej", listCabangRej);
+        model.addAttribute("listCabang", listCabang);
+        model.addAttribute("listJmlItem", listJmlItem);
+        return "viewall-cabang-requested";
+    }
+
+    @GetMapping("/viewall/rejected")
+    private String viewAllCabangRejected(Model model) {
+
+        List<CabangModel> listCabang = cabangService.getListCabangStatus(1);
+
+        List<Integer> listJmlItem = new ArrayList<>();
+        for(CabangModel cabang: listCabang) {
+            listJmlItem.add(cabang.getListItemCabang().size());
+        }
+
+        model.addAttribute("listCabang", listCabang);
+        model.addAttribute("listJmlItem", listJmlItem);
+        return "viewall-cabang-rejected";
+    }
+
+    @RequestMapping(value="/accept/{idCabang}", method = { RequestMethod.GET, RequestMethod.POST })
+    private String acceptCabang(@PathVariable Long idCabang, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        UserModel currentUser = userService.findUserByUsername(currentUsername);
+
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+
+        cabang.setStatus(2);
+        cabang.setPenanggungJawab(currentUser);
+
+        cabangService.addCabang(cabang);
+        model.addAttribute("nama", cabang.getNama());
+        model.addAttribute("namaUser", currentUser.getName());
+        model.addAttribute("status","acc");
+        return "request-status";
+    }
+
+    @RequestMapping(value="/decline/{idCabang}", method = { RequestMethod.GET, RequestMethod.POST })
+    private String declineCabang(@PathVariable Long idCabang, Model model){
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+
+        cabang.setStatus(1);
+        cabangService.addCabang(cabang);
+
+        // cabangService.deleteCabang(cabang);
+
+        model.addAttribute("nama", cabang.getNama());
+        model.addAttribute("status","dec");
+        return "request-status";
     }
 }
