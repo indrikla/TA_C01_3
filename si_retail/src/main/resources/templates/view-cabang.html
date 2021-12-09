@@ -23,6 +23,7 @@
             <div style="padding:20px; background-color:#17a2b8;">
                 <h2 class="text-center">Detail Cabang</h2>
             </div>
+            <p style="color: red" th:text="${message}"></p>
             <div class="card-body">
                 <a class="text-dark " href="/cabang/viewall"><u>← Back</u></a>
                 <br><br>
@@ -78,55 +79,53 @@
                                 <p th:text="': ' + ${cabang.penanggungJawab.name}"></p>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="title">
-                                <b>Item Cabang</b>         
-                            </td>
-                            <td>
-                                <div th:unless="*{cabang.listItemCabang.size() !=0}">
-                                    <p th:text="'(Belum ada item Cabang)'"></p>
-                                </div>
-                                <br>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
+                <div>
+                    <div th:if="${#authorization.expression('hasAuthority(''Kepala Retail'')')}" style="text-align: right">
+                        <a style="text-align: right" class="btn btn-primary" th:href="${cabang.id} + @{/add/item}"> + Tambah Item</a>
+                    </div>
+                    <b class="title">Item Cabang</b>
+                </div>
+                <div>
+                <div th:unless="*{cabang.listItemCabang.size() !=0}">
+                    <p th:text="'(Belum ada item Cabang)'"></p>
+                </div>
+
                 <div th:if="*{cabang.listItemCabang.size() !=0}">
-                    <a class="btn btn-outline-primary" style="margin:0;" th:href="@{/item/add}">+ Tambah Item</a>
-                    <br><br>
                     <table class="table">
                         <thead>
-                        <tr style="text-align:center; background-color:#17a2b8;">
-                            <th>No</th>
-                            <th>Harga</th>
-                            <th>Stok</th>
-                            <th>Kategori</th>
-                            <th>Cabang</th>
-                        </tr>
+                            <tr th:style="'text-align:center;'" class="bg-warning">
+                                <th>Nama</th>
+                                <th>Harga</th>
+                                <th>Stok</th>
+                                <th>Kategori</th>
+                                <th>Promo</th>
+                                <th>Hapus</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="item, iterationStatus : ${cabang.listItemCabang}"
-                            th:style="${iterationStatus.odd} ? 'background:#E0E0E0;'" class="text-center">
-                            <td th:text="${iterationStatus.count}"></td>
-                            <td th:text="${item.harga}"></td>
-                            <td th:text="${item.stok}"></td>
-                            <td th:text="${item.kategori}"></td>
-                            <td th:text="${item.cabang}"></td>
-                            <td class="d-inline-flex">
-                                <!-- <a class="btn btn-sm btn-outline-primary" th:href="@{/cabang/} + ${cabang.id}">Detail</a>
-                                <div th:if="${idRole != 3}">
-                                <a class="btn btn-sm btn-primary ml-2 mr-2" th:href="@{/cabang/update/} + ${cabang.id}">Update</a>
-                                <a class="btn btn-sm btn-danger" th:href="@{/cabang/delete/} + ${cabang.id}">Delete</a>
-                                </div> -->
-                            </td>
-                        </tr>
+                            <tr th:each="item : ${cabang.listItemCabang}">
+                                <td th:text="${item.nama}"></td>
+                                <td th:text="${item.harga}"></td>
+                                <td th:text="${item.stok}"></td>
+                                <td th:text="${item.kategori}"></td>
+
+<!--                                TODO: Ganti URL dan Authorizationnya -->
+                                <td>
+                                    <a style="margin-top: 0px;" class="btn btn-warning" th:href="@{/}"> Terapkan Promo </a>
+                                </td>
+                                <td>
+                                    <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/}"> Hapus item</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
-
+    </div>
 </body>
 
 </html>

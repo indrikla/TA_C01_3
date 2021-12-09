@@ -1,11 +1,13 @@
 package apap.tk.si_retail.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -48,8 +50,9 @@ public class CabangModel implements Serializable {
     @Column(nullable = false)
     private String no_telp;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "penanggung_jawab", referencedColumnName = "id", nullable = false)
+    @Nullable
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "penanggung_jawab", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserModel penanggungJawab;
 
