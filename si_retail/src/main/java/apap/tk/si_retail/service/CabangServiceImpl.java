@@ -56,7 +56,11 @@ public class CabangServiceImpl implements CabangService {
         List<ItemCabangModel> listItem = cabang.getListItemCabang();
         Boolean checkItem = listItem.size() == 0;
 
+<<<<<<< HEAD
+        if ((status == 0 || status == 1) && checkItem) {
+=======
         if ((status == 0 || status == 1|| status == 2) && checkItem) {
+>>>>>>> main
             cabangDB.delete(cabang);
             return 1;
         }
