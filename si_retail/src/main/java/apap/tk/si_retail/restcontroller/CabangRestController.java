@@ -2,6 +2,7 @@ package apap.tk.si_retail.restcontroller;
 
 import apap.tk.si_retail.rest.BaseResponseCabangModel;
 import apap.tk.si_retail.model.CabangModel;
+import apap.tk.si_retail.rest.CabangDTO;
 import apap.tk.si_retail.service.CabangRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class CabangRestController {
     CabangRestService cabangRestService;
 
     @PostMapping(value="/create")
-    private BaseResponseCabangModel createCabang(@Valid @RequestBody CabangModel cabang, BindingResult bindingResult) {
+    private BaseResponseCabangModel createCabang(@Valid @RequestBody CabangDTO cabang, BindingResult bindingResult) {
         BaseResponseCabangModel response = new BaseResponseCabangModel();
         if(bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
@@ -28,8 +29,8 @@ public class CabangRestController {
             );
         }else{
             try {
-                CabangModel newCabang = cabangRestService.createCabang(cabang);
-                response.setStatus(201);
+                CabangModel newCabang = cabangRestService.createRequestCabang(cabang);
+                response.setStatus(200);
                 response.setMessage("created");
                 response.setCabangModel(newCabang);
             } catch (Exception e) {
@@ -38,7 +39,6 @@ public class CabangRestController {
                 response.setCabangModel(null);
             }
             return response;
-//            return cabangRestService.createCabang(cabang);
         }
     }
 

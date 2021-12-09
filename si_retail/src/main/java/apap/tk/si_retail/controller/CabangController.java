@@ -43,27 +43,19 @@ public class CabangController {
         }
     }
 
-    // @PostMapping(value="/add")
-    // private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
-    //     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    //     String currentUsername = authentication.getName();
-    //     UserModel currentUser = userService.findUserByUsername(currentUsername);
+     @PostMapping(value="/add")
+     private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
+         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+         String currentUsername = authentication.getName();
+         UserModel currentUser = userService.findUserByUsername(currentUsername);
 
-    //     cabang.setPenanggungJawab(currentUser);
+         cabang.setPenanggungJawab(currentUser);
 
-    //     model.addAttribute("nama", cabang.getNama());
-    //     System.out.println(cabang.getPenanggungJawab());
-    //     cabangService.addCabang(cabang);
-    //     return "add-cabang-success";
-    // }
-
-    @PostMapping(value="/add")
-    private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
-        cabang.setStatus(0);
-        model.addAttribute("nama", cabang.getNama());
-        cabangService.addCabang(cabang);
-        return "add-cabang-success";
-    }
+         model.addAttribute("nama", cabang.getNama());
+         System.out.println(cabang.getPenanggungJawab());
+         cabangService.addCabang(cabang);
+         return "add-cabang-success";
+     }
 
     @GetMapping("/viewall")
     private String viewAllCabang(Model model) {
@@ -74,11 +66,10 @@ public class CabangController {
 
         List<CabangModel> listCabang;
         List<CabangModel> listCabangRequest = cabangService.getListCabangStatus(0);
-
         if(idRole == 2) {
             listCabang = cabangService.getListCabangManager(currentUser);
         } else {
-            listCabang = cabangService.getListCabangStatus(2);
+            listCabang = cabangService.getListCabang();
         }
         List<Integer> listJmlItem = new ArrayList<>();
         for(CabangModel cabang: listCabang) {
