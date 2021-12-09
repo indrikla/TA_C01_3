@@ -87,13 +87,42 @@
                                     <p th:text="'(Belum ada item Cabang)'"></p>
                                 </div>
                                 <br>
-                                <div th:if="*{cabang.listItemCabang.size() !=0}">
-                                    <!-- TODO: fill item cabang kalo udah ada, bentuknya bisa pake tabel aja -->
-                                </div>
                             </td>
                         </tr>
                     </tbody>
-                </table> 
+                </table>
+                <div th:if="*{cabang.listItemCabang.size() !=0}">
+                    <a class="btn btn-outline-primary" style="margin:0;" th:href="@{/item/add}">+ Tambah Item</a>
+                    <br><br>
+                    <table class="table">
+                        <thead>
+                        <tr style="text-align:center; background-color:#17a2b8;">
+                            <th>No</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Kategori</th>
+                            <th>Cabang</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item, iterationStatus : ${cabang.listItemCabang}"
+                            th:style="${iterationStatus.odd} ? 'background:#E0E0E0;'" class="text-center">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${item.harga}"></td>
+                            <td th:text="${item.stok}"></td>
+                            <td th:text="${item.kategori}"></td>
+                            <td th:text="${item.cabang}"></td>
+                            <td class="d-inline-flex">
+                                <!-- <a class="btn btn-sm btn-outline-primary" th:href="@{/cabang/} + ${cabang.id}">Detail</a>
+                                <div th:if="${idRole != 3}">
+                                <a class="btn btn-sm btn-primary ml-2 mr-2" th:href="@{/cabang/update/} + ${cabang.id}">Update</a>
+                                <a class="btn btn-sm btn-danger" th:href="@{/cabang/delete/} + ${cabang.id}">Delete</a>
+                                </div> -->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div> 
             </div>
         </div>
     </div>
