@@ -101,7 +101,7 @@
                                 <th>Stok</th>
                                 <th>Kategori</th>
                                 <th>Promo</th>
-                                <th>Hapus</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,13 +110,13 @@
                                 <td th:text="${item.harga}"></td>
                                 <td th:text="${item.stok}"></td>
                                 <td th:text="${item.kategori}"></td>
-
 <!--                                TODO: Ganti URL dan Authorizationnya -->
                                 <td>
                                     <a style="margin-top: 0px;" class="btn btn-warning" th:href="@{/}"> Terapkan Promo </a>
                                 </td>
                                 <td>
                                     <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/}"> Hapus item</a>
+                                    <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/cabang/tambahstok/} + ${cabang.id} +@{/} + ${item.id}">Tambah Stok</a>
                                 </td>
                             </tr>
                         </tbody>

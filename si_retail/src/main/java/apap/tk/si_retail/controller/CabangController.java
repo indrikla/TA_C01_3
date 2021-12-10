@@ -1,6 +1,7 @@
 package apap.tk.si_retail.controller;
 
 import apap.tk.si_retail.model.*;
+import apap.tk.si_retail.repository.ItemCabangDB;
 import apap.tk.si_retail.rest.ItemDetailUpdate;
 import apap.tk.si_retail.rest.ItemModel;
 import apap.tk.si_retail.service.*;
@@ -43,27 +44,27 @@ public class CabangController {
         }
     }
 
-    // @PostMapping(value="/add")
-    // private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
-    //     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    //     String currentUsername = authentication.getName();
-    //     UserModel currentUser = userService.findUserByUsername(currentUsername);
-
-    //     cabang.setPenanggungJawab(currentUser);
-
-    //     model.addAttribute("nama", cabang.getNama());
-    //     System.out.println(cabang.getPenanggungJawab());
-    //     cabangService.addCabang(cabang);
-    //     return "add-cabang-success";
-    // }
-
     @PostMapping(value="/add")
     private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
-        cabang.setStatus(0);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        UserModel currentUser = userService.findUserByUsername(currentUsername);
+
+        cabang.setPenanggungJawab(currentUser);
+
         model.addAttribute("nama", cabang.getNama());
+        System.out.println(cabang.getPenanggungJawab());
         cabangService.addCabang(cabang);
         return "add-cabang-success";
     }
+
+    // @PostMapping(value="/add")
+    // private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
+    //     cabang.setStatus(0);
+    //     model.addAttribute("nama", cabang.getNama());
+    //     cabangService.addCabang(cabang);
+    //     return "add-cabang-success";
+    // }
 
     @GetMapping("/viewall")
     private String viewAllCabang(Model model) {
@@ -270,5 +271,25 @@ public class CabangController {
         model.addAttribute("nama", cabang.getNama());
         model.addAttribute("status","dec");
         return "request-status";
+    }
+
+    @GetMapping(value = "/tambahstok/{idCabang}/{idItem}")
+    private String tambahStok(@PathVariable Long idCabang, @PathVariable Long idItem, Model model){
+        ItemCabangModel item = itemCabangService.getItemCabangByIdItemCabang(idItem);
+
+        model.addAttribute("idCabang", idCabang);
+        model.addAttribute("idCabang", idItem);
+        model.addAttribute("namaItem",item.getNama());
+        return "tambah-stok-item";
+    }
+
+    @RequestMapping(value = "/tambahstok/{idCabang}/{idItem}", method = { RequestMethod.POST })
+    private String tambahStokSubmit(@PathVariable Long idCabang, @PathVariable Long idItem, @RequestParam Integer stok, Model model){
+        String uuid = itemCabangService.getItemCabangByIdItemCabang(idItem).getUuid_item();
+
+        itemCabangService.tambahanStok(uuid, stok, idCabang);
+
+        System.out.println(idCabang.toString() + " " + uuid.toString() + " " + stok.toString());
+        return "tambah-stok-success";
     }
 }
