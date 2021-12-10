@@ -65,6 +65,5 @@ public class ItemCabangRestServiceImpl implements ItemCabangRestService {
         } catch(Exception exc)  {
             return null;
         }
-
     }
 }
