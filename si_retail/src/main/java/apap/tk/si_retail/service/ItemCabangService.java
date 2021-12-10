@@ -10,5 +10,6 @@ public interface ItemCabangService {
     List<ItemCabangModel> getListItemCabang();
     List<ItemCabangModel> getListItemCabangByCabang(CabangModel cabang);
     ItemCabangModel getItemCabangByIdItemCabang(Long idItemCabang);
+    void deleteItemCabang (ItemCabangModel item);
     void tambahanStok(String uuid, Integer stok, Long idCabang);
 }

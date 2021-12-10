@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -206,6 +207,24 @@ public class CabangController {
 
         redirAttrs.addFlashAttribute("message", message);
         return "redirect:/cabang/" + idCabang;
+    }
+
+    @RequestMapping(value = "item/delete/{idItem}",
+            method = RequestMethod.GET)
+    public String removeItemFromCabang(
+            @PathVariable Long idItem,
+            @ModelAttribute ItemCabangModel itemCabangModel,
+            Model model
+    ) {
+        ItemCabangModel itemCabang = itemCabangService.getItemCabangByIdItemCabang(idItem);
+
+        itemCabangService.deleteItemCabang(itemCabang);
+
+        model.addAttribute("namaItem", itemCabang.getNama());
+        model.addAttribute("namaCabang", itemCabang.getCabang().getNama());
+        model.addAttribute("idCabang", itemCabang.getCabang().getId());
+
+        return "remove-item";
     }
 
     @GetMapping("/viewall/request")

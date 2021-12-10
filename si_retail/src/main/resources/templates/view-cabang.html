@@ -116,7 +116,8 @@
                                 </td>
                                 <td>
                                     <a style="margin-top: 0px;" class="btn btn-outline-primary" th:href="@{/cabang/tambahstok/} + ${cabang.id} +@{/} + ${item.id}">📦 Tambah Stok</a>
-                                    <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/}">🗑️ Hapus item</a>
+                                    <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/cabang/item/delete/} + ${item.id}">🗑️ Hapus item</a>
+
                                 </td>
                             </tr>
                         </tbody>
