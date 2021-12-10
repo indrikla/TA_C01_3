@@ -310,4 +310,7 @@ public class CabangController {
         System.out.println(idCabang.toString() + " " + uuid.toString() + " " + stok.toString());
         return "tambah-stok-success";
     }
+
+    @GetMapping(value = "/list-coupon")
+    private List<ItemModel> retrieveListCoupon() { return itemCabangRestService.retrieveListItemModel(); }
 }
