@@ -4,6 +4,7 @@ import apap.tk.si_retail.model.*;
 import apap.tk.si_retail.repository.ItemCabangDB;
 import apap.tk.si_retail.rest.ItemDetailUpdate;
 import apap.tk.si_retail.rest.ItemModel;
+import apap.tk.si_retail.rest.KuponModel;
 import apap.tk.si_retail.service.*;
 import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class CabangController {
     private ItemCabangRestService itemCabangRestService;
     @Autowired
     private ItemCabangService itemCabangService;
+    @Autowired
+    private KuponRestService kuponRestService;
 
     @GetMapping("/add")
     private String addCabangFormPage(Model model) {
@@ -187,7 +190,6 @@ public class CabangController {
 
 //            TODO: Ganti kalo promo udah ke implemen
                 itemCabang.setId_promo(1);
-
                 itemCabang.setNama(itemModelAPI.getNama());
                 itemCabang.setCabang(cabang);
                 itemCabang.setKategori(itemModelAPI.getKategori());
@@ -312,5 +314,5 @@ public class CabangController {
     }
 
     @GetMapping(value = "/list-coupon")
-    private List<ItemModel> retrieveListCoupon() { return itemCabangRestService.retrieveListItemModel(); }
+    private List<KuponModel> retrieveListCoupon() { return kuponRestService.retrieveListKuponModel(); }
 }
