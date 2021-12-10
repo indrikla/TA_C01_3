@@ -1,4 +1,7 @@
 package apap.tk.si_retail.service;
+
+import apap.tk.si_retail.model.CabangModel;
+import apap.tk.si_retail.model.ItemCabangModel;
 import apap.tk.si_retail.repository.ItemCabangDB;
 import apap.tk.si_retail.rest.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class KuponRestServiceImpl implements KuponRestService{
+public class KuponRestServiceImpl implements KuponRestService {
     @Autowired
     ItemCabangDB itemCabangDB;
 
@@ -22,17 +25,29 @@ public class KuponRestServiceImpl implements KuponRestService{
 
 
     @Override
-    public List<KuponModel> retrieveListKuponModel() {
+    public List<KuponModel> getAllKupon() {
+      //return itemCabangDB.findAll();
+
         try {
-            BaseResponseListItemModel response = this.webClient.get()
-                    .uri(Setting.siBusinessUrl)
+            BaseResponseListKuponModel response = this.webClient.get()
+                    .uri(Setting.siBusinessUrl + "api/list-coupon/")
                     .retrieve()
-                    .bodyToMono(BaseResponseListItemModel.class).block();
-            return null; //TODO: Return apa ya?
+                    .bodyToMono(BaseResponseListKuponModel.class).block();
+            return response.getListKuponDetail();
+
         } catch(Exception exc)  {
             return null;
         }
     }
 
-
+    @Override
+    public ItemCabangModel applyKupon(Long idItem, int idKupon, float discountAmount) {
+        ItemCabangModel itemCabang = itemCabangDB.getById(idItem);
+        int diskon = Math.round((discountAmount / 100) * itemCabang.getHarga());
+        int hargaItem = itemCabang.getHarga();
+        itemCabang.setHarga(hargaItem - diskon);
+        itemCabang.setId_promo(idKupon);
+        itemCabangDB.save(itemCabang);
+        return itemCabang;
+    }
 }

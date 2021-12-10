@@ -82,7 +82,7 @@
                     </tbody>
                 </table>
                 <div>
-                    <div th:if="${#authorization.expression('hasAuthority(''Kepala Retail'')')}" style="text-align: right">
+                    <div th:if="${user.role.id} == 1" style="text-align: right">
                         <a style="text-align: right" class="btn btn-primary" th:href="${cabang.id} + @{/add/item}"> + Tambah Item</a>
                     </div>
                     <b class="title">Item Cabang</b>
@@ -109,15 +109,14 @@
                                 <td th:text="${item.nama}"></td>
                                 <td th:text="${item.harga}"></td>
                                 <td th:text="${item.stok}"></td>
-                                <td th:text="${item.kategori}"></td>
+                                <td th:text="${item.id_promo}"></td>
 <!--                                TODO: Ganti URL dan Authorizationnya -->
                                 <td>
-                                    <a style="margin-top: 0px;" class="btn btn-warning" th:href="@{/}">🎫 Terapkan Promo </a>
+                                    <a th:if="${user.role.id} != 3  AND ${item.id_promo} == 0" style="margin-top: 0px;" class="btn btn-warning" th:href="@{/cabang/list-coupon/} + ${item.id} + '?idCabang=' + ${cabang.id}">🎫 Terapkan Promo </a>
                                 </td>
                                 <td>
                                     <a style="margin-top: 0px;" class="btn btn-outline-primary" th:href="@{/cabang/tambahstok/} + ${cabang.id} +@{/} + ${item.id}">📦 Tambah Stok</a>
                                     <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/cabang/item/delete/} + ${item.id}">🗑️ Hapus item</a>
-
                                 </td>
                             </tr>
                         </tbody>

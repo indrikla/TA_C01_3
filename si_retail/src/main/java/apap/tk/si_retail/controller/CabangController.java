@@ -138,12 +138,16 @@ public class CabangController {
             Model model
     ) {
         CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        UserModel currentUser = userService.findUserByUsername(currentUsername);
         try{
             model.addAttribute("penanggungJawab", cabang.getPenanggungJawab().getName());
         } catch(NullPointerException e){
             model.addAttribute("penanggungJawab", "-");
         }
         model.addAttribute("cabang", cabang);
+        model.addAttribute("user", currentUser);
         return "view-cabang";
     }
 
@@ -313,6 +317,19 @@ public class CabangController {
         return "tambah-stok-success";
     }
 
-    @GetMapping(value = "/list-coupon")
-    private List<KuponModel> retrieveListCoupon() { return kuponRestService.retrieveListKuponModel(); }
+   @GetMapping(value = "/list-coupon/{idItem}")
+   private String retrieveListCoupon(@RequestParam Long idCabang, @PathVariable Long idItem, Model model) {
+        List<KuponModel> listKupon = kuponRestService.getAllKupon();
+        model.addAttribute("listKupon", listKupon);
+        model.addAttribute("idCabang", idCabang);
+       model.addAttribute("idItem", idItem);
+       return "viewall-kupon";
+   }
+
+   @GetMapping(value = "/apply-coupon")
+    private String applyCoupon(@RequestParam Long idCabang, @RequestParam Long idItem, @RequestParam int idKupon, @RequestParam float discountAmount) {
+        kuponRestService.applyKupon(idItem, idKupon, discountAmount);
+        return String.format("redirect:/cabang/%s", idCabang);
+   }
+
 }
