@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -82,7 +82,9 @@
                     </tbody>
                 </table>
                 <div>
-                    <div th:if="${#authorization.expression('hasAuthority(''Kepala Retail'')')}" style="text-align: right">
+                    <div sec:authorize="hasAnyAuthority('Kepala Retail', 'Manager Cabang')"
+                         th:if="${#authorization.expression('hasAnyAuthority(''Kepala Retail'')')}"
+                        style="text-align: right">
                         <a style="text-align: right" class="btn btn-primary" th:href="${cabang.id} + @{/add/item}"> + Tambah Item</a>
                     </div>
                     <b class="title">Item Cabang</b>
