@@ -31,8 +31,19 @@ public class CabangServiceImpl implements CabangService {
     }
 
     @Override
+    public List<CabangModel> getListCabangStatus(Integer status){
+        return cabangDB.findAllByStatus(status);
+    }
+
+    @Override
     public List<CabangModel> getListCabangManager(UserModel manager) {
-        return cabangDB.findAllByPenanggungJawab(manager);
+        List<CabangModel> ListCabang = cabangDB.findAllByPenanggungJawab(manager);
+        for (CabangModel cabang : ListCabang) {
+            if(cabang.getStatus()==0){
+                ListCabang.remove(cabang);
+            }
+        }
+        return ListCabang;
     }
 
     @Override

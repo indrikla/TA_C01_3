@@ -1,6 +1,7 @@
 package apap.tk.si_retail.controller;
 
 import apap.tk.si_retail.model.*;
+import apap.tk.si_retail.repository.ItemCabangDB;
 import apap.tk.si_retail.rest.ItemDetailUpdate;
 import apap.tk.si_retail.rest.ItemModel;
 import apap.tk.si_retail.service.*;
@@ -44,17 +45,27 @@ public class CabangController {
         }
     }
 
-    @PostMapping(value="/add")
-    private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUsername = authentication.getName();
-        UserModel currentUser = userService.findUserByUsername(currentUsername);
-        cabang.setPenanggungJawab(currentUser);
-        model.addAttribute("nama", cabang.getNama());
-        System.out.println(cabang.getPenanggungJawab());
-        cabangService.addCabang(cabang);
-        return "add-cabang-success";
-    }
+     @PostMapping(value="/add")
+     private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
+         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+         String currentUsername = authentication.getName();
+         UserModel currentUser = userService.findUserByUsername(currentUsername);
+
+         cabang.setPenanggungJawab(currentUser);
+
+         model.addAttribute("nama", cabang.getNama());
+         System.out.println(cabang.getPenanggungJawab());
+         cabangService.addCabang(cabang);
+         return "add-cabang-success";
+     }
+
+    // @PostMapping(value="/add")
+    // private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
+    //     cabang.setStatus(0);
+    //     model.addAttribute("nama", cabang.getNama());
+    //     cabangService.addCabang(cabang);
+    //     return "add-cabang-success";
+    // }
 
     @GetMapping("/viewall")
     private String viewAllCabang(Model model) {
@@ -62,17 +73,20 @@ public class CabangController {
         String currentUsername = authentication.getName();
         UserModel currentUser = userService.findUserByUsername(currentUsername);
         Long idRole = currentUser.getRole().getId();
+
         List<CabangModel> listCabang;
+        List<CabangModel> listCabangRequest = cabangService.getListCabangStatus(0);
         if(idRole == 2) {
             listCabang = cabangService.getListCabangManager(currentUser);
         } else {
-            listCabang = cabangService.getListCabang();
+            listCabang = cabangService.getListCabangStatus(2);
         }
         List<Integer> listJmlItem = new ArrayList<>();
         for(CabangModel cabang: listCabang) {
             listJmlItem.add(cabang.getListItemCabang().size());
         }
 
+        model.addAttribute("listCabangReq", listCabangRequest);
         model.addAttribute("listCabang", listCabang);
         model.addAttribute("listJmlItem", listJmlItem);
         model.addAttribute("idRole", idRole);
@@ -121,20 +135,23 @@ public class CabangController {
             Model model
     ) {
         CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+        try{
+            model.addAttribute("penanggungJawab", cabang.getPenanggungJawab().getName());
+        } catch(NullPointerException e){
+            model.addAttribute("penanggungJawab", "-");
+        }
         model.addAttribute("cabang", cabang);
         return "view-cabang";
     }
 
-    @GetMapping("/{idCabang}/add/item")
-    public String addItemCabangFormPage(@PathVariable Long idCabang, Model model) {
-        List<ItemModel> listItemCabangAPI = itemCabangRestService.retrieveListItemModel();
-//        TODO: Risa Verify ini sekali submit harus multiple atau ga
-//        List<ItemCabangModel> listItemCabangPending = cabangService.getCabangByIdCabang(idCabang).getListItemCabang();
-//        model.addAttribute("listItemCabangPending", listItemCabangPending);
-        model.addAttribute("listItemCabangAPI", listItemCabangAPI);
-        model.addAttribute("idCabang", idCabang);
-        return "form-add-item-cabang";
-    }
+//         List<ItemModel> listItemCabangAPI = itemCabangRestService.retrieveListItemModel();
+// //        TODO: Risa Verify ini sekali submit harus multiple atau ga
+// //        List<ItemCabangModel> listItemCabangPending = cabangService.getCabangByIdCabang(idCabang).getListItemCabang();
+// //        model.addAttribute("listItemCabangPending", listItemCabangPending);
+//         model.addAttribute("listItemCabangAPI", listItemCabangAPI);
+//         model.addAttribute("idCabang", idCabang);
+//         return "form-add-item-cabang";
+    // }
 
 
     @PostMapping("/{idCabang}/add/item")
@@ -210,5 +227,87 @@ public class CabangController {
         return "remove-item";
     }
 
+    @GetMapping("/viewall/request")
+    private String viewAllCabangRequested(Model model) {
 
+        List<CabangModel> listCabang = cabangService.getListCabangStatus(0);
+        List<CabangModel> listCabangRej = cabangService.getListCabangStatus(1);
+
+        List<Integer> listJmlItem = new ArrayList<>();
+        for(CabangModel cabang: listCabang) {
+            listJmlItem.add(cabang.getListItemCabang().size());
+        }
+
+        model.addAttribute("listCabangRej", listCabangRej);
+        model.addAttribute("listCabang", listCabang);
+        model.addAttribute("listJmlItem", listJmlItem);
+        return "viewall-cabang-requested";
+    }
+
+    @GetMapping("/viewall/rejected")
+    private String viewAllCabangRejected(Model model) {
+
+        List<CabangModel> listCabang = cabangService.getListCabangStatus(1);
+
+        List<Integer> listJmlItem = new ArrayList<>();
+        for(CabangModel cabang: listCabang) {
+            listJmlItem.add(cabang.getListItemCabang().size());
+        }
+
+        model.addAttribute("listCabang", listCabang);
+        model.addAttribute("listJmlItem", listJmlItem);
+        return "viewall-cabang-rejected";
+    }
+
+    @RequestMapping(value="/accept/{idCabang}", method = { RequestMethod.GET, RequestMethod.POST })
+    private String acceptCabang(@PathVariable Long idCabang, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        UserModel currentUser = userService.findUserByUsername(currentUsername);
+
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+
+        cabang.setStatus(2);
+        cabang.setPenanggungJawab(currentUser);
+
+        cabangService.addCabang(cabang);
+        model.addAttribute("nama", cabang.getNama());
+        model.addAttribute("namaUser", currentUser.getName());
+        model.addAttribute("status","acc");
+        return "request-status";
+    }
+
+    @RequestMapping(value="/decline/{idCabang}", method = { RequestMethod.GET, RequestMethod.POST })
+    private String declineCabang(@PathVariable Long idCabang, Model model){
+        CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+
+        cabang.setStatus(1);
+        cabangService.addCabang(cabang);
+
+        // cabangService.deleteCabang(cabang);
+
+        model.addAttribute("nama", cabang.getNama());
+        model.addAttribute("status","dec");
+        return "request-status";
+    }
+
+    @GetMapping(value = "/tambahstok/{idCabang}/{idItem}")
+    private String tambahStok(@PathVariable Long idCabang, @PathVariable Long idItem, Model model){
+        ItemCabangModel item = itemCabangService.getItemCabangByIdItemCabang(idItem);
+
+        model.addAttribute("idCabang", idCabang);
+        model.addAttribute("idCabang", idItem);
+        model.addAttribute("namaItem",item.getNama());
+        return "tambah-stok-item";
+    }
+
+    @RequestMapping(value = "/tambahstok/{idCabang}/{idItem}", method = { RequestMethod.POST })
+    private String tambahStokSubmit(@PathVariable Long idCabang, @PathVariable Long idItem, @RequestParam Integer stok, Model model){
+        String uuid = itemCabangService.getItemCabangByIdItemCabang(idItem).getUuid_item();
+
+        itemCabangService.tambahanStok(uuid, stok, idCabang);
+
+        System.out.println(idCabang.toString() + " " + uuid.toString() + " " + stok.toString());
+        return "tambah-stok-success";
+    }
 }

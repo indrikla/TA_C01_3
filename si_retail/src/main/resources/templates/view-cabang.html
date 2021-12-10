@@ -76,7 +76,7 @@
                                 <b>Penanggung Jawab </b>        
                             </td>
                             <td>
-                                <p th:text="': ' + ${cabang.penanggungJawab.name}"></p>
+                                <p th:text="': ' + ${penanggungJawab}"></p>
                             </td>
                         </tr>
                     </tbody>
@@ -95,28 +95,29 @@
                 <div th:if="*{cabang.listItemCabang.size() !=0}">
                     <table class="table">
                         <thead>
-                            <tr th:style="'text-align:center;'" class="bg-warning">
+                            <tr th:style="'text-align:center;'" class="bg-info">
                                 <th>Nama</th>
                                 <th>Harga</th>
                                 <th>Stok</th>
                                 <th>Kategori</th>
                                 <th>Promo</th>
-                                <th>Hapus</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="item : ${cabang.listItemCabang}">
+                            <tr th:each="item : ${cabang.listItemCabang}" class="text-center">
                                 <td th:text="${item.nama}"></td>
                                 <td th:text="${item.harga}"></td>
                                 <td th:text="${item.stok}"></td>
                                 <td th:text="${item.kategori}"></td>
-
 <!--                                TODO: Ganti URL dan Authorizationnya -->
                                 <td>
-                                    <a style="margin-top: 0px;" class="btn btn-warning" th:href="@{/}"> Terapkan Promo </a>
+                                    <a style="margin-top: 0px;" class="btn btn-warning" th:href="@{/}">🎫 Terapkan Promo </a>
                                 </td>
                                 <td>
-                                    <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/cabang/item/delete/} + ${item.id}"> Hapus item</a>
+                                    <a style="margin-top: 0px;" class="btn btn-outline-primary" th:href="@{/cabang/tambahstok/} + ${cabang.id} +@{/} + ${item.id}">📦 Tambah Stok</a>
+                                    <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/cabang/item/delete/} + ${item.id}">🗑️ Hapus item</a>
+
                                 </td>
                             </tr>
                         </tbody>
@@ -124,6 +125,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div style="text-align: right; margin-bottom: 100px;">
+        <a style="text-align: right" class="btn btn-outline-danger" th:href="@{/cabang/delete/} + ${cabang.id}">🗑️ Hapus Cabang</a>
     </div>
     </div>
 </body>
