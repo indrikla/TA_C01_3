@@ -109,7 +109,7 @@
                                 <td th:text="${item.nama}"></td>
                                 <td th:text="${item.harga}"></td>
                                 <td th:text="${item.stok}"></td>
-                                <td th:text="${item.id_promo}"></td>
+                                <td th:text="${item.kategori}"></td>
 <!--                                TODO: Ganti URL dan Authorizationnya -->
                                 <td>
                                     <a th:if="${user.role.id} != 3  AND ${item.id_promo} == 0" style="margin-top: 0px;" class="btn btn-warning" th:href="@{/cabang/list-coupon/} + ${item.id} + '?idCabang=' + ${cabang.id}">🎫 Terapkan Promo </a>
