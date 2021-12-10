@@ -4,6 +4,7 @@ import apap.tk.si_retail.model.CabangModel;
 import apap.tk.si_retail.model.UserModel;
 import apap.tk.si_retail.repository.CabangDB;
 import apap.tk.si_retail.repository.UserDB;
+import apap.tk.si_retail.rest.CabangDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,8 +24,14 @@ public class CabangRestServiceImpl implements CabangRestService{
 
     @Override
     public CabangModel createCabang(CabangModel cabang){
-        cabang.setStatus(0);
+        cabang.setStatus(2);
         return cabangDB.save(cabang);
+    }
+
+    @Override
+    public CabangModel createRequestCabang(CabangDTO cabangDTO) {
+        CabangModel newCabang = cabangDTO.convertToCabang();
+        return cabangDB.save(newCabang);
     }
 
     @Override

@@ -44,19 +44,19 @@ public class CabangController {
         }
     }
 
-    @PostMapping(value="/add")
-    private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUsername = authentication.getName();
-        UserModel currentUser = userService.findUserByUsername(currentUsername);
+     @PostMapping(value="/add")
+     private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
+         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+         String currentUsername = authentication.getName();
+         UserModel currentUser = userService.findUserByUsername(currentUsername);
 
-        cabang.setPenanggungJawab(currentUser);
+         cabang.setPenanggungJawab(currentUser);
 
-        model.addAttribute("nama", cabang.getNama());
-        System.out.println(cabang.getPenanggungJawab());
-        cabangService.addCabang(cabang);
-        return "add-cabang-success";
-    }
+         model.addAttribute("nama", cabang.getNama());
+         System.out.println(cabang.getPenanggungJawab());
+         cabangService.addCabang(cabang);
+         return "add-cabang-success";
+     }
 
     // @PostMapping(value="/add")
     // private String addCabangSubmit(@ModelAttribute CabangModel cabang, Model model) {
@@ -75,7 +75,6 @@ public class CabangController {
 
         List<CabangModel> listCabang;
         List<CabangModel> listCabangRequest = cabangService.getListCabangStatus(0);
-
         if(idRole == 2) {
             listCabang = cabangService.getListCabangManager(currentUser);
         } else {
