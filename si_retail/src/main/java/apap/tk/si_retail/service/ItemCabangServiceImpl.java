@@ -44,4 +44,9 @@ public class ItemCabangServiceImpl implements ItemCabangService {
         return null;
     }
 
+    @Override
+    public void deleteItemCabang(ItemCabangModel item) {
+        itemCabangDB.delete(item);
+    }
+
 }

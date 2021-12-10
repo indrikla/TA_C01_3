@@ -10,4 +10,6 @@ public interface ItemCabangService {
     List<ItemCabangModel> getListItemCabang();
     List<ItemCabangModel> getListItemCabangByCabang(CabangModel cabang);
     ItemCabangModel getItemCabangByIdItemCabang(Long idItemCabang);
+    void deleteItemCabang (ItemCabangModel item);
+
 }
