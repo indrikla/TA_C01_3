@@ -38,13 +38,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
 
-//   @Autowired
-//   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-//       auth.inMemoryAuthentication()
-//               .passwordEncoder(encoder())
-//               .withUser("beliBarang").password(encoder().encode("si-retail"))
-//               .roles("USER");
-//   }
+   @Autowired
+   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+       auth.inMemoryAuthentication()
+               .passwordEncoder(encoder())
+               .withUser("admin").password(encoder().encode("admin"))
+               .roles("KEPALA RETAIL");
+   }
 
 
     @Autowired
