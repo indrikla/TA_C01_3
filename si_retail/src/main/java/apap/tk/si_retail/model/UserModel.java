@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -39,6 +40,7 @@ public class UserModel implements Serializable {
 
     @NotNull
     @Lob
+    @Type(type = "org.hibernate.type.StringType")
     @Column(name = "password", nullable = false)
     private String password;
 
