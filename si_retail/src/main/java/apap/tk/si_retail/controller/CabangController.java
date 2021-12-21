@@ -191,8 +191,8 @@ public class CabangController {
             } else {
                 cabang.getListItemCabang().add(itemCabang);
 
-//            TODO: Ganti kalo promo udah ke implemen
-                itemCabang.setId_promo(1);
+
+                itemCabang.setId_promo(0);
                 itemCabang.setNama(itemModelAPI.getNama());
                 itemCabang.setCabang(cabang);
                 itemCabang.setKategori(itemModelAPI.getKategori());
