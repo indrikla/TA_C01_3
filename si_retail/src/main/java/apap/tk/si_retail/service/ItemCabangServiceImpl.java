@@ -58,6 +58,11 @@ public class ItemCabangServiceImpl implements ItemCabangService {
     }
 
     @Override
+    public void deleteItemCabang(ItemCabangModel item) {
+        itemCabangDB.delete(item);
+    }
+
+    @Override
     public void tambahanStok(String uuid, Integer stok, Long idCabang){
         Map<String,Object> data = new HashMap();
         data.put("idItem", uuid);

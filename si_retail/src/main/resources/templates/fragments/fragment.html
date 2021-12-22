@@ -21,39 +21,216 @@
 </head>
 
 <body>
-<nav th:fragment="navbar(laman)"  class="navbar navbar-expand-lg navbar-light bg-info" style="margin-bottom: 55px;">
-    <a class="navbar-brand font-weight-bold text-dark" href="/">SI-RETAIL</a>
-    <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavaltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-    > <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item" ><a class=" nav-link" th:classappend="${laman == 'home'} ? 'active'"  th:href="@{/}">
-                Home<span class="sr-only">(current)</span>
-            </a></li>
-            <li class="nav-item"><a class=" nav-link" th:classappend="${laman == 'user'} ? 'active'" th:href="@{/user/viewall}">
-                User<span class="sr-only">(current)</span>
-            </a></li>
-            <li class="nav-item"><a class="nav-link" th:classappend="${laman == 'cabang'} ? 'active'" th:href="@{/cabang/viewall}">
-                Cabang<span class="sr-only">(current)</span>
-            </a></li>
-<!--            <li class="nav-item"><a class="nav-link" th:classappend="${laman == 'user'} ? 'active'" th:href="@{/user/viewall}">-->
-<!--                User<span class="sr-only">(current)</span>-->
-<!--            </a></li>-->
-        </ul>
 
-        <ul class="navbar-nav pull-right">
-            <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
-        </ul>
+
+<section th:fragment="navbar(laman)" class="h-100 w-100 bg-white" style="box-sizing: border-box;">
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+      .navbar-1-1.navbar-light{
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.061);
+        height: 80px;
+      }
+     
+      .navbar-1-1.navbar-light .navbar-nav .nav-link {
+        color: #092a33;
+        transition: 0.3s;
+      }
+
+      .navbar-1-1.navbar-light .navbar-nav .nav-link.active {
+        font-weight: 500;
+      }
+
+      .navbar-1-1 .btn-get-started {
+        border-radius: 20px;
+        padding: 8px 12px;
+        font-weight: 500;
+      }
+
+      .navbar-1-1 .btn-get-started-blue {
+        border-color: #2731c4;
+        color:#2731c4;
+        transition: 0.3s;
+      }
+
+      .navbar-1-1 .btn-get-started-blue:hover {
+        background-color: #2731c4;
+        color:white;
+        transition: 0.3s;
+      }
+    </style>
+    <nav class="navbar-1-1 navbar navbar-expand-lg navbar-light p-4 px-md-4 mb-3 bg-body"
+      style="font-family: Poppins, sans-serif">
+      <div class="container">
+        <a class="navbar-brand" th:href="@{/}">
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M3.5 15.75C3.5 8.98451 8.98451 3.5 15.75 3.5H29.75C30.7165 3.5 31.5 4.2835 31.5 5.25C31.5 6.2165 30.7165 7 29.75 7H15.75C10.9175 7 7 10.9175 7 15.75V29.75C7 30.7165 6.2165 31.5 5.25 31.5C4.2835 31.5 3.5 30.7165 3.5 29.75V15.75Z"
+              fill="#0EC8F8" />
+            <path
+              d="M10.5 17.5C10.5 13.634 13.634 10.5 17.5 10.5H31.5C35.366 10.5 38.5 13.634 38.5 17.5V31.5C38.5 35.366 35.366 38.5 31.5 38.5H17.5C13.634 38.5 10.5 35.366 10.5 31.5V17.5Z"
+              fill="#0EC8F8" />
+          </svg>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link px-md-4" aria-current="page" th:classappend="${laman == 'home'} ? 'active'"  th:href="@{/}">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-md-4" th:classappend="${laman == 'user'} ? 'active'" th:href="@{/user/viewall}">User<span class="sr-only">(current)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-md-4" th:classappend="${laman == 'cabang'} ? 'active'" th:href="@{/cabang/viewall}">Cabang<span class="sr-only">(current)</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <a class="btn btn-get-started btn-get-started-blue" th:href="@{/logout}">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+</section>
+
+<footer th:fragment="footer" class="page-footer font-small blue">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800;900&display=swap");
+
+        * {
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        body .font-red-hat-display {
+            font-family: 'Red Hat Display', sans-serif !important;
+        }
+
+        body footer {
+            background: #313E60;
+            padding-top: 50px;
+            padding-bottom: 70px;
+        }
+
+        body footer .logo {
+            font-family: 'Red Hat Display', sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            line-height: 38px;
+            color: #FAFAFD;
+        }
+
+        body footer .social-media {
+            margin-top: 55px;
+        }
+
+        body footer .copyright {
+            font-family: 'Red Hat Display', sans-serif !important;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 135%;
+            color: #FAFAFD;
+            margin-top: 20px;
+        }
+
+        body footer .nav-footer p {
+            font-weight: 700 !important;
+            font-family: 'Red Hat Display', sans-serif !important;
+            font-size: 20px;
+            line-height: 135%;
+            color: #FAFAFD;
+        }
+
+        body footer .nav-footer a {
+            font-weight: 400 !important;
+            font-family: 'Red Hat Display', sans-serif !important;
+            font-size: 20px;
+            line-height: 135%;
+            color: #FAFAFD;
+        }
+
+        body footer li {
+            margin-bottom: 16px;
+        }
+    </style>
+    <div class="container text-md-left">
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-3 address">
+                <div class="logo font-red-hat-display">
+                    SI-Retail
+                </div>
+                <!-- <div class="social-media">
+                    <a href="#">
+                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/bi_linkedin.svg"
+                            alt="linkedin" class="img-fluid mr-4">
+                    </a>
+                    <a href="#">
+                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/bi_facebook.svg"
+                            alt="facebook" class="img-fluid mr-4">
+                    </a>
+                    <a href="#">
+                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/bi_twitter.svg"
+                            alt="twitter" class="img-fluid mr-4">
+                    </a>
+                    <a href="#">
+                        <img src="https://api.elements.buildwithangga.com/storage/files/2/assets/Content/Content10/bi_instagram.svg"
+                            alt="twitch" class="img-fluid mr-4">
+                    </a>
+                </div> -->
+                <div class="copyright font-red-hat-display">
+                    Made with 💗 by C01 SI-RETAIL
+                </div>
+            </div>
+            <hr class="clearfix w-100 d-md-none pb-3">
+            <div class="row col-md-6 nav-footer">
+                <div class="col-md-4 mb-md-0 mb-3">
+                    <p>
+                        Our Team
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Fahmi F Dani</a>
+                        </li>
+                        <li>
+                            <a href="#!">Fayza Azzahra R</a>
+                        </li>
+                        <li>
+                            <a href="#!">Ibnu Hambali</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-md-0 mb-3">
+                  
+              </div>
+                <div class="col-md-4 mb-md-0 mb-3">
+                    <p style="color:rgb(49, 62, 96);">
+                        -
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Indri Klarissa R.</a>
+                        </li>
+                        <li>
+                            <a href="#!">Zalfa Luqyana A.</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
+</footer> 
 
 </body>
 </html>
