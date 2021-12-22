@@ -18,10 +18,11 @@
 
 <body>
     <nav th:replace="fragments/fragment :: navbar('none')"></nav>
-    <div class="container">
+    <div class="container" style="margin: 5vh auto;">
         <div class="card">
-            <div style="padding:20px; background-color:#17a2b8;">
+            <div style="padding:20px; background-color:white">
                 <h2 class="text-center">Detail Cabang</h2>
+                <hr>
             </div>
             <p style="color: red" th:text="${message}"></p>
             <div class="card-body">
@@ -95,7 +96,7 @@
                 <div th:if="*{cabang.listItemCabang.size() !=0}">
                     <table class="table">
                         <thead>
-                            <tr th:style="'text-align:center;'" class="bg-info">
+                            <tr th:style="'text-align:center;'" class="bg-info text-white">
                                 <th>Nama</th>
                                 <th>Harga</th>
                                 <th>Stok</th>
@@ -105,7 +106,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="item : ${cabang.listItemCabang}" class="text-center">
+                            <tr th:each="item,iterationStatus : ${cabang.listItemCabang}" th:style="${iterationStatus.odd} ? 'background:#E0E0E0;'" class="text-center">
                                 <td th:text="${item.nama}"></td>
                                 <td th:text="${item.harga}"></td>
                                 <td th:text="${item.stok}"></td>
@@ -129,6 +130,7 @@
         <a style="text-align: right" class="btn btn-outline-danger" th:href="@{/cabang/delete/} + ${cabang.id}">🗑️ Hapus Cabang</a>
     </div>
     </div>
+    <footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 
 </html>

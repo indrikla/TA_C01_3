@@ -42,6 +42,7 @@ public class UserModel implements Serializable {
     @Lob
     @Type(type = "org.hibernate.type.StringType")
     @Column(name = "password", nullable = false)
+
     private String password;
 
     @ManyToOne(fetch = FetchType.EAGER)
