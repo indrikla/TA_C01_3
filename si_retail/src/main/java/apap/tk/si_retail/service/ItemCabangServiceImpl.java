@@ -72,8 +72,8 @@ public class ItemCabangServiceImpl implements ItemCabangService {
                     .retrieve()
                     .bodyToMono(String.class);
         
-        // System.out.println(Mono.just(data).block());
-        // System.out.println(result.block());
+        System.out.println(Mono.just(data).block());
+        System.out.println(result.block());
         // System.out.println(Mono.just(data),Map.class);
     }
 }
