@@ -10,7 +10,7 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar(laman)"></nav>
-<div class="container" style="margin: 18vh auto">
+<div class="container" style="margin: 20vh auto">
     <h2 th:style=
                 "'text-align:center;
             padding-bottom:20px;'"
@@ -20,7 +20,7 @@
     <div th:if="*{listCabang.size() != 0}">
         <table class="table">
             <thead>
-            <tr th:style="'text-align:center;'" class="bg-info">
+            <tr th:style="'text-align:center;'" class="bg-info text-white">
                 <th>No</th>
                 <th>Id</th>
                 <th>Nama</th>
