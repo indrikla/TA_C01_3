@@ -82,11 +82,11 @@
                 </tr>
                 </tbody>
             </table>
+            <b class="title">Item Cabang</b>
             <div sec:authorize="!hasAuthority('Staff Cabang')">
                 <div style="text-align: right">
                     <a style="text-align: right" class="btn btn-primary" th:href="${cabang.id} + @{/add/item}"> + Tambah Item</a>
                 </div>
-                <b class="title">Item Cabang</b>
             </div>
             <div>
                 <div th:unless="*{cabang.listItemCabang.size() !=0}">
