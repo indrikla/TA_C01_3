@@ -17,78 +17,78 @@
 </head>
 
 <body>
-    <nav th:replace="fragments/fragment :: navbar('none')"></nav>
-    <div class="container" style="margin: 5vh auto;">
-        <div class="card">
-            <div style="padding:20px; background-color:white">
-                <h2 class="text-center">Detail Cabang</h2>
-                <hr>
-            </div>
-            <p style="color: red" th:text="${message}"></p>
-            <div class="card-body">
-                <a class="text-dark " href="/cabang/viewall"><u>← Back</u></a>
-                <br><br>
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <td class="title">
-                                <b>Nama Cabang</b>         
-                            </td>
-                            <td>
-                                <p th:text="': ' + ${cabang.nama}"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="title">
-                                <b>Alamat</b>         
-                            </td>
-                            <td>
-                                <p th:text="': ' + ${cabang.alamat}"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="title">
-                                <b>Ukuran Cabang</b>       
-                            </td>
-                            <td>
-                                <p th:text="': ' + ${cabang.ukuran}">m<sup>2</sup></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="title">
-                                <b>Status</b>         
-                            </td>
-                            <td>
-                                <p th:if="${cabang.status} == 0">: Menunggu Persetujuan</p>
-                                <p th:if="${cabang.status} == 1">: Ditolak</p>
-                                <p th:if="${cabang.status} == 2">: Disetujui</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="title">
-                                <b>Nomor Telepon</b>        
-                            </td>
-                            <td>
-                                <p th:text="': ' + ${cabang.no_telp}"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="title">
-                                <b>Penanggung Jawab </b>        
-                            </td>
-                            <td>
-                                <p th:text="': ' + ${penanggungJawab}"></p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>
-                    <div th:if="${user.role.id} == 1" style="text-align: right">
-                        <a style="text-align: right" class="btn btn-primary" th:href="${cabang.id} + @{/add/item}"> + Tambah Item</a>
-                    </div>
-                    <b class="title">Item Cabang</b>
+<nav th:replace="fragments/fragment :: navbar('none')"></nav>
+<div class="container" style="margin: 5vh auto;">
+    <div class="card">
+        <div style="padding:20px; background-color:white">
+            <h2 class="text-center">Detail Cabang</h2>
+            <hr>
+        </div>
+        <p style="color: red" th:text="${message}"></p>
+        <div class="card-body">
+            <a class="text-dark " href="/cabang/viewall"><u>← Back</u></a>
+            <br><br>
+            <table class="table table-borderless">
+                <tbody>
+                <tr>
+                    <td class="title">
+                        <b>Nama Cabang</b>
+                    </td>
+                    <td>
+                        <p th:text="': ' + ${cabang.nama}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">
+                        <b>Alamat</b>
+                    </td>
+                    <td>
+                        <p th:text="': ' + ${cabang.alamat}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">
+                        <b>Ukuran Cabang</b>
+                    </td>
+                    <td>
+                        <p th:text="': ' + ${cabang.ukuran}">m<sup>2</sup></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">
+                        <b>Status</b>
+                    </td>
+                    <td>
+                        <p th:if="${cabang.status} == 0">: Menunggu Persetujuan</p>
+                        <p th:if="${cabang.status} == 1">: Ditolak</p>
+                        <p th:if="${cabang.status} == 2">: Disetujui</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">
+                        <b>Nomor Telepon</b>
+                    </td>
+                    <td>
+                        <p th:text="': ' + ${cabang.no_telp}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title">
+                        <b>Penanggung Jawab </b>
+                    </td>
+                    <td>
+                        <p th:text="': ' + ${penanggungJawab}"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div sec:authorize="!hasAuthority('Staff Cabang')">
+                <div style="text-align: right">
+                    <a style="text-align: right" class="btn btn-primary" th:href="${cabang.id} + @{/add/item}"> + Tambah Item</a>
                 </div>
-                <div>
+                <b class="title">Item Cabang</b>
+            </div>
+            <div>
                 <div th:unless="*{cabang.listItemCabang.size() !=0}">
                     <p th:text="'(Belum ada item Cabang)'"></p>
                 </div>
@@ -96,30 +96,29 @@
                 <div th:if="*{cabang.listItemCabang.size() !=0}">
                     <table class="table">
                         <thead>
-                            <tr th:style="'text-align:center;'" class="bg-info text-white">
-                                <th>Nama</th>
-                                <th>Harga</th>
-                                <th>Stok</th>
-                                <th>Kategori</th>
-                                <th>Promo</th>
-                                <th>Action</th>
-                            </tr>
+                        <tr th:style="'text-align:center;'" class="bg-info text-white">
+                            <th>Nama</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Kategori</th>
+                            <th>Promo</th>
+                            <th>Action</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="item,iterationStatus : ${cabang.listItemCabang}" th:style="${iterationStatus.odd} ? 'background:#E0E0E0;'" class="text-center">
-                                <td th:text="${item.nama}"></td>
-                                <td th:text="${item.harga}"></td>
-                                <td th:text="${item.stok}"></td>
-                                <td th:text="${item.id_promo}"></td>
-<!--                                TODO: Ganti URL dan Authorizationnya -->
-                                <td>
-                                    <a th:if="${user.role.id} != 3  AND ${item.id_promo} == 0" style="margin-top: 0px;" class="btn btn-warning" th:href="@{/cabang/list-coupon/} + ${item.id} + '?idCabang=' + ${cabang.id}">🎫 Terapkan Promo </a>
-                                </td>
-                                <td>
-                                    <a style="margin-top: 0px;" class="btn btn-outline-primary" th:href="@{/cabang/tambahstok/} + ${cabang.id} +@{/} + ${item.id}">📦 Tambah Stok</a>
-                                    <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/cabang/item/delete/} + ${item.id}">🗑️ Hapus item</a>
-                                </td>
-                            </tr>
+                        <tr th:each="item,iterationStatus : ${cabang.listItemCabang}" th:style="${iterationStatus.odd} ? 'background:#E0E0E0;'" class="text-center">
+                            <td th:text="${item.nama}"></td>
+                            <td th:text="${item.harga}"></td>
+                            <td th:text="${item.stok}"></td>
+                            <td th:text="${item.id_promo}"></td>
+                            <td>
+                                <a th:if="${user.role.id} != 3  AND ${item.id_promo} == 0" style="margin-top: 0px;" class="btn btn-warning" th:href="@{/cabang/list-coupon/} + ${item.id} + '?idCabang=' + ${cabang.id}">🎫 Terapkan Promo </a>
+                            </td>
+                            <td>
+                                <a style="margin-top: 0px;" class="btn btn-outline-primary" th:href="@{/cabang/tambahstok/} + ${cabang.id} +@{/} + ${item.id}">📦 Tambah Stok</a>
+                                <a style="margin-top: 0px;" class="btn btn-outline-danger" th:href="@{/cabang/item/delete/} + ${item.id}">🗑️ Hapus item</a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -129,8 +128,8 @@
     <div style="text-align: right; margin-bottom: 100px;">
         <a style="text-align: right" class="btn btn-outline-danger" th:href="@{/cabang/delete/} + ${cabang.id}">🗑️ Hapus Cabang</a>
     </div>
-    </div>
-    <footer th:replace="fragments/fragment :: footer"></footer>
+</div>
+<footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 
 </html>
