@@ -16,9 +16,13 @@
 <div class="container" style="margin:8vw auto;">
     <br><br>
     <h2><b>Daftar User</b></h2>
-    <br>
-    <a class="btn btn-primary" th:href="@{/user/add}">+ Tambah User</a>
-    <br><br>
+
+    <td sec:authorize="hasAuthority('Kepala Retail')">
+        <br>
+        <a class="btn btn-primary" th:href="@{/user/add}">+ Tambah User</a>
+        <br><br>
+    </td>
+
     <div>
         <table class="table table-borderless">
             <thead>
@@ -28,7 +32,7 @@
                 <th>Username</th>
                 <th>Role</th>
                 <th sec:authorize="!hasAuthority('Staff Cabang')">Update Data</th>
-<!--                <th scope="col">Action</th>-->
+                <!--                <th scope="col">Action</th>-->
             </tr>
             </thead>
             <tbody>
@@ -44,9 +48,9 @@
                 <td sec:authorize="!hasAuthority('Staff Cabang')">
                     <a th:if="!${user.role.id == 1 && currentUserRole == 2}" th:href="@{/user/update/} + ${user.username}" class="btn btn-sm btn-outline-primary">Update</a>
                 </td>
-<!--                <td>-->
-<!--                    <a class="btn btn-danger" th:href="@{/user/delete}">Delete</a>-->
-<!--                </td>-->
+                <!--                <td>-->
+                <!--                    <a class="btn btn-danger" th:href="@{/user/delete}">Delete</a>-->
+                <!--                </td>-->
             </tr>
             </tbody>
         </table>
