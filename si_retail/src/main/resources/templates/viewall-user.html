@@ -11,27 +11,29 @@
 </head>
 
 <body>
-<nav th:replace="fragments/fragment :: navbar('Film')"></nav>
+<nav th:replace="fragments/fragment :: navbar(user)"></nav>
 
-<div class="container">
+<div class="container" style="margin:8vw auto;">
     <br><br>
-    <h2>Daftar Seluruh User</h2>
+    <h2><b>Daftar User</b></h2>
     <br>
-    <a class="btn btn-primary" th:href="@{/user/add}">Tambah User</a>
+    <a class="btn btn-primary" th:href="@{/user/add}">+ Tambah User</a>
     <br><br>
     <div>
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">Nama</th>
-                <th scope="col">Username</th>
-                <th scope="col">Role</th>
-                <th sec:authorize="!hasAuthority('Staff Cabang')" scope="col">Update Data</th>
+        <table class="table table-borderless">
+            <thead>
+            <tr class="bg-info text-center text-white">
+                <th>No</th>
+                <th>Nama</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th sec:authorize="!hasAuthority('Staff Cabang')">Update Data</th>
 <!--                <th scope="col">Action</th>-->
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${listUser}">
+            <tr th:each="user,iterationStatus : ${listUser}" th:style="${iterationStatus.odd} ? 'background:#E0E0E0;'" class="text-center">
+                <td th:text="${iterationStatus.count}"></td>
                 <th th:text="${user.name}"></th>
                 <td th:text="${user.username}"></td>
                 <td>
@@ -40,7 +42,7 @@
                     <span th:if="${user.role.id == 3}" th:text="'Staff Cabang'"></span>
                 </td>
                 <td sec:authorize="!hasAuthority('Staff Cabang')">
-                    <a th:if="!${user.role.id == 1 && currentUserRole == 2}" style="color: blue" th:href="@{/user/update/} + ${user.username}" class="btn btn-outline">Update</a>
+                    <a th:if="!${user.role.id == 1 && currentUserRole == 2}" th:href="@{/user/update/} + ${user.username}" class="btn btn-sm btn-outline-primary">Update</a>
                 </td>
 <!--                <td>-->
 <!--                    <a class="btn btn-danger" th:href="@{/user/delete}">Delete</a>-->
@@ -52,7 +54,7 @@
     <br>
 </div>
 </div>
-
+<footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 
 </html>

@@ -10,7 +10,7 @@
 
 <body>
 <nav th:replace="fragments/fragment :: navbar(laman)"></nav>
-<div class="container" th:style="'margin-top:70px;'">
+<div class="container" style="margin: 20vh auto">
     <h2 th:style=
                 "'text-align:center;
             padding-bottom:20px;'"
@@ -20,13 +20,14 @@
     <div th:if="*{listCabang.size() != 0}">
         <table class="table">
             <thead>
-            <tr th:style="'text-align:center;'" class="bg-info">
+            <tr th:style="'text-align:center;'" class="bg-info text-white">
                 <th>No</th>
                 <th>Id</th>
                 <th>Nama</th>
                 <th>No Telepon</th>
                 <th>Ukuran (m<sup>2</sup>)</th>
                 <th>Jumlah Item</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -39,6 +40,7 @@
                 <td th:text="${cabang.no_telp}"></td>
                 <td th:text="${cabang.ukuran}"></td>
                 <td th:text="${listJmlItem[__${iterationStatus.index}__]}"></td>
+                <td>Menunggu Persetujuan</td>
                 <td>
                     <a class="btn btn-sm btn-outline-primary" th:href="@{/cabang/} + ${cabang.id}">Detail</a>
                     <a class="btn btn-sm btn-primary" th:href="@{/cabang/accept/} + ${cabang.id}">Terima</a>
@@ -53,8 +55,9 @@
     <div th:unless="*{listCabang.size() != 0}">
         <h2 style="text-align: center; padding:10px; background-color:rgb(224, 224, 224);">Tidak ada permintaan cabang</h2>
     </div>
-    
 </div>
+<footer th:replace="fragments/fragment :: footer"></footer>
+
 </body>
 
 </html>

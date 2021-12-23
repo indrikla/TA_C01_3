@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController {
     @RequestMapping("/")
     public String home(){
-        return "home";
+        return "landing-page";
     }
 
     @RequestMapping("/login")
-    public String login(){ return "login"; }
+    public String login(){ return "login-page"; }
 }

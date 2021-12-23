@@ -45,8 +45,8 @@
                             <a class="btn btn-outline-primary" th:href="@{/user/viewall}">Kembali</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                             <br>
-                        <div th:if="${currentUser.id == user.id}">
-                            Kamu akan ter-logout dan harus login dengan data baru setelah update.
+                        <div th:if="${currentUser.id == user.id}" style="margin-top: 20px">
+                            Kamu akan ter-logout otomatis dan harus login dengan data baru setelah update.
                         </div>
                     </form>
                 </div>

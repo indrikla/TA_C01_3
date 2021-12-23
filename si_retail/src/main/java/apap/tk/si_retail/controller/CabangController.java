@@ -4,6 +4,7 @@ import apap.tk.si_retail.model.*;
 import apap.tk.si_retail.repository.ItemCabangDB;
 import apap.tk.si_retail.rest.ItemDetailUpdate;
 import apap.tk.si_retail.rest.ItemModel;
+import apap.tk.si_retail.rest.KuponModel;
 import apap.tk.si_retail.service.*;
 import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class CabangController {
     private ItemCabangRestService itemCabangRestService;
     @Autowired
     private ItemCabangService itemCabangService;
+    @Autowired
+    private KuponRestService kuponRestService;
 
     @GetMapping("/add")
     private String addCabangFormPage(Model model) {
@@ -135,23 +138,26 @@ public class CabangController {
             Model model
     ) {
         CabangModel cabang = cabangService.getCabangByIdCabang(idCabang);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        UserModel currentUser = userService.findUserByUsername(currentUsername);
         try{
             model.addAttribute("penanggungJawab", cabang.getPenanggungJawab().getName());
         } catch(NullPointerException e){
             model.addAttribute("penanggungJawab", "-");
         }
         model.addAttribute("cabang", cabang);
+        model.addAttribute("user", currentUser);
         return "view-cabang";
     }
 
-//         List<ItemModel> listItemCabangAPI = itemCabangRestService.retrieveListItemModel();
-// //        TODO: Risa Verify ini sekali submit harus multiple atau ga
-// //        List<ItemCabangModel> listItemCabangPending = cabangService.getCabangByIdCabang(idCabang).getListItemCabang();
-// //        model.addAttribute("listItemCabangPending", listItemCabangPending);
-//         model.addAttribute("listItemCabangAPI", listItemCabangAPI);
-//         model.addAttribute("idCabang", idCabang);
-//         return "form-add-item-cabang";
-    // }
+    @GetMapping("/{idCabang}/add/item")
+    public String addItemCabangFormPage(@PathVariable Long idCabang, Model model) {
+        List<ItemModel> listItemCabangAPI = itemCabangRestService.retrieveListItemModel();
+        model.addAttribute("listItemCabangAPI", listItemCabangAPI);
+        model.addAttribute("idCabang", idCabang);
+        return "form-add-item-cabang";
+    }
 
 
     @PostMapping("/{idCabang}/add/item")
@@ -185,9 +191,8 @@ public class CabangController {
             } else {
                 cabang.getListItemCabang().add(itemCabang);
 
-//            TODO: Ganti kalo promo udah ke implemen
-                itemCabang.setId_promo(1);
 
+                itemCabang.setId_promo(0);
                 itemCabang.setNama(itemModelAPI.getNama());
                 itemCabang.setCabang(cabang);
                 itemCabang.setKategori(itemModelAPI.getKategori());
@@ -310,4 +315,20 @@ public class CabangController {
         System.out.println(idCabang.toString() + " " + uuid.toString() + " " + stok.toString());
         return "tambah-stok-success";
     }
+
+   @GetMapping(value = "/list-coupon/{idItem}")
+   private String retrieveListCoupon(@RequestParam Long idCabang, @PathVariable Long idItem, Model model) {
+        List<KuponModel> listKupon = kuponRestService.getAllKupon();
+        model.addAttribute("listKupon", listKupon);
+        model.addAttribute("idCabang", idCabang);
+       model.addAttribute("idItem", idItem);
+       return "viewall-kupon";
+   }
+
+   @GetMapping(value = "/apply-coupon")
+    private String applyCoupon(@RequestParam Long idCabang, @RequestParam Long idItem, @RequestParam int idKupon, @RequestParam float discountAmount) {
+        kuponRestService.applyKupon(idItem, idKupon, discountAmount);
+        return String.format("redirect:/cabang/%s", idCabang);
+   }
+
 }

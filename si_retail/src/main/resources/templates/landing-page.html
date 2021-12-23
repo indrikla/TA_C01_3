@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title> SI-RETAIL </title>
+      <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+      <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    </head>
+    <body>
+      <nav th:replace="fragments/fragment :: navbar('home')"></nav>
+       <section class="w-100 bg-white" style="box-sizing: border-box; margin:10vw 0; ">
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+      .header-4-2 .modal-item.modal {
+        top: 2rem;
+      }
+
+      .header-4-2 .navbar,
+      .header-4-2 .hero {
+        padding: 3rem 2rem;
+      }
+
+      .header-4-2 .navbar-light .navbar-nav .nav-link {
+        font: 300 18px/1.5rem Poppins, sans-serif;
+        color: #1d1e3c;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .navbar-light .navbar-nav .nav-link:hover {
+        font: 600 18px/1.5rem Poppins, sans-serif;
+        color: #1d1e3c;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .navbar-light .navbar-nav .active>.nav-link,
+      .header-4-2 .navbar-light .navbar-nav .nav-link.active,
+      .header-4-2 .navbar-light .navbar-nav .nav-link.show,
+      .header-4-2 .navbar-light .navbar-nav .show>.nav-link {
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .navbar-light .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+
+      .header-4-2 .btn{
+        color:blue;
+      }
+
+      .header-4-2 .btn:focus,
+      .header-4-2 .btn:active {
+        outline: none !important;
+      }
+
+      .header-4-2 .btn-fill {
+        font: 600 18px / normal Poppins, sans-serif;
+        background-color: #2731c4;
+        border-radius: 12px;
+        padding: 12px 32px;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .btn-fill:hover {
+        --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+          var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+        transition: 0.3s;
+      }
+
+      .header-4-2 .btn-no-fill {
+        font: 300 18px/1.75rem Poppins, sans-serif;
+        color: #1d1e3c;
+        padding: 12px 32px;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .modal-item .modal-dialog .modal-content {
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .responsive li a {
+        padding: 1rem;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .text-caption {
+        font: 600 1.5rem/1.625 Poppins, sans-serif;
+        margin-bottom: 2rem;
+        color: #2731c4;
+      }
+
+      .header-4-2 .left-column {
+        margin-bottom: 2.75rem;
+        width: 100%;
+      }
+
+      .header-4-2 .right-column {
+        width: 100%;
+      }
+
+      .header-4-2 .title-text-big {
+        font: 600 2.25rem/2.5rem Poppins, sans-serif;
+        margin-bottom: 2rem;
+        color: #272e35;
+      }
+
+      .header-4-2 .btn-try {
+        font: 600 1rem/1.5rem Poppins, sans-serif;
+        padding: 1rem 1.5rem;
+        border-radius: 0.75rem;
+        background-color: #2731c4;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .btn-try:hover {
+        --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+          var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+        transition: 0.3s;
+      }
+
+      .header-4-2 .btn-outline {
+        font: 400 1rem/1.5rem Poppins, sans-serif;
+        border: 1px solid #2731c4;
+        color: #2731c4;
+        padding: 1rem 1.5rem;
+        border-radius: 0.75rem;
+        background-color: transparent;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .btn-outline:hover {
+        background-color: #2731c4;
+        color: white;
+        border-color: #2731c4;
+        transition: 0.3s;
+      }
+
+      .header-4-2 .btn-outline:hover div path {
+        fill: #2731c4;
+        transition: 0.3s;
+      }
+
+      @media (min-width: 576px) {
+        .header-4-2 .modal-item .modal-dialog {
+          max-width: 95%;
+          border-radius: 12px;
+        }
+
+        .header-4-2 .navbar {
+          padding: 3rem 2rem;
+        }
+
+        .header-4-2 .hero {
+          padding: 3rem 2rem 5rem;
+        }
+
+        .header-4-2 .title-text-big {
+          font-size: 3rem;
+          line-height: 1.2;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .header-4-2 .navbar {
+          padding: 3rem 4rem;
+        }
+
+        .header-4-2 .hero {
+          padding: 3rem 4rem 5rem;
+        }
+
+        .header-4-2 .left-column {
+          margin-bottom: 3rem;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .header-4-2 .navbar-expand-lg .navbar-nav .nav-link {
+          padding-right: 1.25rem;
+          padding-left: 1.25rem;
+        }
+
+        .header-4-2 .navbar {
+          padding: 3rem 6rem;
+        }
+
+        .header-4-2 .hero {
+          padding: 3rem 6rem 5rem;
+        }
+
+        .header-4-2 .left-column {
+          width: 50%;
+          margin-bottom: 0;
+        }
+
+        .header-4-2 .right-column {
+          width: 50%;
+        }
+
+        .header-4-2 .title-text-big {
+          font-size: 3.75rem;
+          line-height: 1.2;
+        }
+      }
+    </style>
+    <div class="header-4-2 container-xxl mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
+      <div>
+        <div class="mx-auto d-flex flex-lg-row flex-column hero">
+          <!-- Left Column -->
+          <div
+            class="left-column d-flex flex-lg-grow-1 flex-column align-items-lg-start text-lg-start align-items-center text-center">
+            <p class="text-caption" th:text=" 'Hi ' + ${#httpServletRequest.remoteUser} + ' !'" ></p>
+            <h1 class="title-text-big" style="text-align:left;">
+              Selamat datang di<br class="d-lg-block d-none" />
+              SI-Retail
+            </h1>
+            <div class="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
+              <!-- <button class="btn d-inline-flex mb-md-0 btn-try text-white">
+                Try it free
+              </button> -->
+              <a class="btn btn-outline" th:href="@{/cabang/viewall}">
+                <div class="d-flex align-items-center" >
+                  🏡 Lihat Semua Cabang
+                </div>
+              </a>
+              <a class="btn btn-outline" th:href="@{/user/viewall}">
+                <div class="d-flex align-items-center" >
+                  🧑 Lihat Semua User
+                </div>
+              </a>
+            </div>
+          </div>
+          <!-- Right Column -->
+          <div class="right-column text-center d-flex justify-content-lg-end justify-content-center pe-0">
+            <img id="img-fluid" class="h-auto mw-100"
+              src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header4/Header-4-2.png"
+              alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+      <footer th:replace="fragments/fragment :: footer"></footer>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    </body>
+  </html>
